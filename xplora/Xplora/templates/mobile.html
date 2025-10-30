@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xplora - Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <div class="app-container">
+                <!-- Header -->
+                <header class="app-header">
+                    <div class="header-content">
+                        <div class="logo">
+                            <i class="fas fa-compass"></i>
+                            <span>Xplora</span>
+                        </div>
+                        <div class="user-actions">
+                            <i class="fas fa-bell" onclick="window.location.href='#notificaciones'"></i>
+                            <i class="fas fa-search" onclick="toggleSearch()"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Barra de búsqueda -->
+                    <div class="search-container hidden" id="searchContainer">
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Buscar experiencias, lugares, emprendimientos..." id="searchInput">
+                            <button class="clear-search" onclick="clearSearch()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Contenido Principal -->
+                <main class="app-main">
+                    <!-- Bienvenida -->
+                    <section class="welcome-section">
+                        <div class="welcome-content">
+                            <h1>¡Hola, Explorador! 👋</h1>
+                            <p>Descubre lo auténtico de Chía, Tabio y Cajicá</p>
+                        </div>
+                    </section>
+
+                    <!-- Categorías -->
+                    <section class="categories-section">
+                        <h2 class="section-title">Explorar por Categoría</h2>
+                        <div class="categories-grid">
+                            <div class="category-card" onclick="filterByCategory('gastronomia')">
+                                <div class="category-icon gastronomia">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <span>Gastronomía</span>
+                            </div>
+                            <div class="category-card" onclick="filterByCategory('cultura')">
+                                <div class="category-icon cultura">
+                                    <i class="fas fa-landmark"></i>
+                                </div>
+                                <span>Cultura</span>
+                            </div>
+                            <div class="category-card" onclick="filterByCategory('ecoturismo')">
+                                <div class="category-icon ecoturismo">
+                                    <i class="fas fa-hiking"></i>
+                                </div>
+                                <span>Ecoturismo</span>
+                            </div>
+                            <div class="category-card" onclick="filterByCategory('artesania')">
+                                <div class="category-icon artesania">
+                                    <i class="fas fa-palette"></i>
+                                </div>
+                                <span>Artesanías</span>
+                            </div>
+                            <div class="category-card" onclick="filterByCategory('eventos')">
+                                <div class="category-icon eventos">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <span>Eventos</span>
+                            </div>
+                            <div class="category-card" onclick="window.location.href='/mobile/emprendedores'">
+                                <div class="category-icon emprendedores">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                                <span>Emprendedores</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Recomendaciones del Día -->
+                    <section class="recommendations-section">
+                        <div class="section-header">
+                            <h2 class="section-title">💎 Recomendaciones del Día</h2>
+                            <a href="#todas" class="see-all">Ver todas</a>
+                        </div>
+                        
+                        <div class="recommendations-carousel">
+                            {% for experiencia in experiencias %}
+                            <div class="recommendation-card" onclick="window.location.href='/mobile/experiencia/{{ experiencia.id }}'">
+                                <div class="card-image" style="background-image: url('{{ experiencia.imagen }}')">
+                                    <div class="card-badge {{ experiencia.categoria }}">
+                                        {{ experiencia.categoria | title }}
+                                    </div>
+                                    <div class="card-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>{{ experiencia.rating }}</span>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <h3>{{ experiencia.titulo }}</h3>
+                                    <p>{{ experiencia.descripcion }}</p>
+                                    <div class="card-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>{{ experiencia.municipio }}</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>{{ experiencia.duracion }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn-action save-btn" onclick="event.stopPropagation(); toggleSave({{ experiencia.id }})">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="btn-action share-btn" onclick="event.stopPropagation(); shareExperience({{ experiencia.id }})">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+
+                    <!-- Eventos Próximos -->
+                    <section class="events-section">
+                        <div class="section-header">
+                            <h2 class="section-title">📅 Eventos Próximos</h2>
+                            <a href="#eventos" class="see-all">Ver calendario</a>
+                        </div>
+                        
+                        <div class="events-list">
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">15</span>
+                                    <span class="month">DIC</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Feria Gastronómica Chía</h4>
+                                    <p>Plaza Principal de Chía · 10:00 AM</p>
+                                    <span class="event-tag gastronomia">Gastronomía</span>
+                                </div>
+                                <button class="btn-action reminder-btn">
+                                    <i class="far fa-bell"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">20</span>
+                                    <span class="month">DIC</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Noche de Museos Cajicá</h4>
+                                    <p>Museo Local · 6:00 PM</p>
+                                    <span class="event-tag cultura">Cultura</span>
+                                </div>
+                                <button class="btn-action reminder-btn">
+                                    <i class="far fa-bell"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Emprendedores Destacados -->
+                    <section class="featured-emprendedores">
+                        <div class="section-header">
+                            <h2 class="section-title">⭐ Emprendedores Locales</h2>
+                            <a href="/mobile/emprendedores" class="see-all">Ver todos</a>
+                        </div>
+                        
+                        <div class="emprendedores-carousel">
+                            <div class="emprendedor-card" onclick="window.location.href='/mobile/emprendedores'">
+                                <div class="emprendedor-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face')"></div>
+                                <div class="emprendedor-info">
+                                    <h4>Doña María</h4>
+                                    <p>Gastronomía Tradicional</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="emprendedor-card" onclick="window.location.href='/mobile/emprendedores'">
+                                <div class="emprendedor-avatar" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face')"></div>
+                                <div class="emprendedor-info">
+                                    <h4>Carlos Rodríguez</h4>
+                                    <p>Guía de Ecoturismo</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <!-- Navigation Bar -->
+                <nav class="bottom-nav">
+                    <a href="/mobile" class="nav-item active">
+                        <i class="fas fa-home"></i>
+                        <span>Descubrir</span>
+                    </a>
+                    <a href="/mobile/mapas" class="nav-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Mapas</span>
+                    </a>
+                    <a href="/mobile/guardados" class="nav-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Guardados</span>
+                    </a>
+                    <a href="/mobile/perfil" class="nav-item">
+                        <i class="fas fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-to-website">
+        <i class="fas fa-arrow-left"></i>
+        Volver al sitio web
+    </a>
+
+    <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+    <script>
+        // Funcionalidades específicas para la página de inicio
+        function toggleSearch() {
+            const searchContainer = document.getElementById('searchContainer');
+            searchContainer.classList.toggle('hidden');
+            if (!searchContainer.classList.contains('hidden')) {
+                document.getElementById('searchInput').focus();
+            }
+        }
+        
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+        }
+        
+        function filterByCategory(category) {
+            // Aquí iría la lógica para filtrar por categoría
+            showToast(`Filtrando por: ${category}`);
+            // En una implementación real, esto filtraría las experiencias
+        }
+        
+        function toggleSave(experienceId) {
+            const btn = event.target.closest('.save-btn');
+            const icon = btn.querySelector('i');
+            
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                btn.style.color = 'var(--secondary)';
+                showToast('Experiencia guardada en favoritos');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                btn.style.color = '';
+                showToast('Experiencia removida de favoritos');
+            }
+        }
+        
+        function shareExperience(experienceId) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Xplora - Experiencia Única',
+                    text: 'Mira esta experiencia increíble que encontré en Xplora',
+                    url: window.location.origin + '/mobile/experiencia/' + experienceId
+                });
+            } else {
+                showToast('Enlace copiado al portapapeles');
+            }
+        }
+        
+        // Búsqueda en tiempo real
+        document.getElementById('searchInput')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            // Aquí iría la lógica de búsqueda en tiempo real
+            console.log('Buscando:', searchTerm);
+        });
+    </script>
+</body>
+</html>

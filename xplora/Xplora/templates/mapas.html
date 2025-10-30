@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xplora - Mapas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <div class="app-container">
+                <header class="app-header">
+                    <div class="header-content">
+                        <a href="/mobile" class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <h2>Mapas Interactivos</h2>
+                        <div class="user-actions">
+                            <i class="fas fa-location-arrow" id="locationBtn"></i>
+                        </div>
+                    </div>
+                    <!-- Sección de búsqueda agregada -->
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Buscar municipios, rutas...">
+                            <button id="clearSearch" class="clear-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                </header>
+
+                <main class="app-main">
+                    <!-- Mapa interactivo -->
+                    <section class="map-section">
+                        <div class="map-container">
+                            <div class="map-placeholder">
+                                <div class="map-point" style="top: 30%; left: 40%;" data-municipio="chia">
+                                    <div class="point pulse"></div>
+                                    <div class="point-info">Chía</div>
+                                </div>
+                                <div class="map-point" style="top: 50%; left: 35%;" data-municipio="tabio">
+                                    <div class="point pulse"></div>
+                                    <div class="point-info">Tabio</div>
+                                </div>
+                                <div class="map-point" style="top: 45%; left: 55%;" data-municipio="cajica">
+                                    <div class="point pulse"></div>
+                                    <div class="point-info">Cajicá</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Rutas temáticas -->
+                    <section class="rutas-section">
+                        <h3 class="section-title">Rutas Temáticas</h3>
+                        <div class="rutas-grid">
+                            <div class="ruta-card" data-ruta="gastronomica">
+                                <div class="ruta-icon gastronomia">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="ruta-info">
+                                    <h4>Ruta Gastronómica</h4>
+                                    <p>Sabores auténticos de la región</p>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="ruta-card" data-ruta="ecologica">
+                                <div class="ruta-icon ecoturismo">
+                                    <i class="fas fa-hiking"></i>
+                                </div>
+                                <div class="ruta-info">
+                                    <h4>Ruta Ecológica</h4>
+                                    <p>Naturaleza y aventura</p>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="ruta-card" data-ruta="cultural">
+                                <div class="ruta-icon cultura">
+                                    <i class="fas fa-landmark"></i>
+                                </div>
+                                <div class="ruta-info">
+                                    <h4>Ruta Cultural</h4>
+                                    <p>Historia y tradición</p>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Experiencias cercanas -->
+                    <section class="nearby-section">
+                        <h3 class="section-title">Cerca de Ti</h3>
+                        <div class="nearby-list">
+                            {% for experiencia in experiencias %}
+                            <div class="nearby-item" data-experiencia="{{ experiencia.titulo|lower }}">
+                                <div class="item-image" style="background-image: url('{{ experiencia.imagen }}')"></div>
+                                <div class="item-content">
+                                    <h4>{{ experiencia.titulo }}</h4>
+                                    <p>{{ experiencia.descripcion }}</p>
+                                    <div class="item-distance">
+                                        <i class="fas fa-walking"></i>
+                                        <span>1.2 km</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </main>
+
+                <nav class="bottom-nav">
+                    <a href="/mobile" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="/mobile/mapas" class="nav-item active">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Mapas</span>
+                    </a>
+                    <a href="/mobile/guardados" class="nav-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Guardados</span>
+                    </a>
+                    <a href="/mobile/perfil" class="nav-item">
+                        <i class="fas fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-to-website">
+        <i class="fas fa-arrow-left"></i>
+        Volver al sitio web
+    </a>
+
+    <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xplora - Mi Perfil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos específicos para perfil */
+        .profile-section {
+            margin: 20px 0;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .avatar-container {
+            position: relative;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--border-light);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .edit-avatar-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .user-bio {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat span {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .preferences-section {
+            margin: 30px 0;
+        }
+
+        .preferences-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .preference-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 5px;
+            border-radius: 15px;
+            background: var(--background-alt);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .preference-card.active {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .preference-card i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .preference-card.active i {
+            color: var(--primary);
+        }
+
+        .preference-card span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .achievements-section {
+            margin: 30px 0;
+        }
+
+        .achievements-carousel {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: none;
+        }
+
+        .achievements-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .achievement-card {
+            min-width: 200px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .achievement-card.locked {
+            opacity: 0.6;
+        }
+
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .achievement-info p {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .achievement-badge {
+            color: var(--success);
+        }
+
+        .achievement-card.locked .achievement-badge {
+            color: var(--text-light);
+        }
+
+        .settings-section {
+            margin: 30px 0;
+        }
+
+        .settings-list {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.3s;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item.clickable {
+            cursor: pointer;
+        }
+
+        .setting-item.clickable:hover {
+            background: var(--background-alt);
+        }
+
+        .setting-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .setting-info i {
+            font-size: 1.2rem;
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .setting-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .setting-info p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-switch label {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border);
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-switch label:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        .toggle-switch input:checked + label {
+            background-color: var(--primary);
+        }
+
+        .toggle-switch input:checked + label:before {
+            transform: translateX(26px);
+        }
+
+        /* Modales */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            width: 100%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .close-modal:hover {
+            background: var(--background-alt);
+        }
+
+        .privacy-options, .help-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .privacy-option, .help-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: var(--background-alt);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .privacy-option:hover, .help-option:hover {
+            background: var(--border-light);
+        }
+
+        .option-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-info i {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .option-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .option-info p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Modo Oscuro */
+        body.dark-mode {
+            --background: #1A202C;
+            --background-alt: #2D3748;
+            --text: #FFFFFF;
+            --text-light: #A0AEC0;
+            --border: #4A5568;
+            --border-light: #2D3748;
+        }
+
+        body.dark-mode .phone-screen {
+            background: var(--background);
+        }
+
+        body.dark-mode .app-header,
+        body.dark-mode .bottom-nav,
+        body.dark-mode .settings-list,
+        body.dark-mode .modal-content,
+        body.dark-mode .achievement-card,
+        body.dark-mode .preference-card.active {
+            background: var(--background-alt);
+            border-color: var(--border);
+        }
+
+        body.dark-mode .preference-card:not(.active) {
+            background: var(--background);
+        }
+
+        body.dark-mode .back-to-website {
+            background: var(--background-alt);
+            color: var(--text);
+            border-color: var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <div class="app-container">
+                <header class="app-header">
+                    <div class="header-content">
+                        <a href="/mobile" class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <h2>Mi Perfil</h2>
+                        <div class="user-actions">
+                            <i class="fas fa-cog" onclick="openSettings()"></i>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="app-main">
+                    <!-- Información del usuario -->
+                    <section class="profile-section">
+                        <div class="profile-header">
+                            <div class="avatar-container">
+                                <div class="avatar">
+                                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face" alt="Avatar">
+                                </div>
+                                <button class="edit-avatar-btn" onclick="editAvatar()">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                            <div class="profile-info">
+                                <h1>Cuenta Invitado</h1>
+                                <p class="user-bio">Amante del ecoturismo y la gastronomía local 🌿🍴</p>
+                                <div class="user-stats">
+                                    <div class="stat">
+                                        <strong>06</strong>
+                                        <span>Experiencias</span>
+                                    </div>
+                                    <div class="stat">
+                                        <strong>4</strong>
+                                        <span>Guardados</span>
+                                    </div>
+                                    <div class="stat">
+                                        <strong>4.4</strong>
+                                        <span>Rating</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Preferencias -->
+                    <section class="preferences-section">
+                        <h3 class="section-title">Mis Preferencias</h3>
+                        <div class="preferences-grid">
+                            <div class="preference-card active" data-preference="gastronomia" onclick="togglePreference(this)">
+                                <i class="fas fa-utensils"></i>
+                                <span>Gastronomía</span>
+                            </div>
+                            <div class="preference-card active" data-preference="ecoturismo" onclick="togglePreference(this)">
+                                <i class="fas fa-hiking"></i>
+                                <span>Ecoturismo</span>
+                            </div>
+                            <div class="preference-card" data-preference="cultura" onclick="togglePreference(this)">
+                                <i class="fas fa-landmark"></i>
+                                <span>Cultura</span>
+                            </div>
+                            <div class="preference-card active" data-preference="aventura" onclick="togglePreference(this)">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <span>Aventura</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Logros -->
+                    <section class="achievements-section">
+                        <div class="section-header">
+                            <h3 class="section-title">Mis Logros</h3>
+                            <a href="#" class="see-all">Ver todos</a>
+                        </div>
+                        <div class="achievements-carousel">
+                            <div class="achievement-card unlocked">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-compass"></i>
+                                </div>
+                                <div class="achievement-info">
+                                    <h4>Explorador Novato</h4>
+                                    <p>Completaste 5 experiencias</p>
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                            <div class="achievement-card unlocked">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="achievement-info">
+                                    <h4>Foodie Local</h4>
+                                    <p>3 rutas gastronómicas</p>
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-mountain"></i>
+                                </div>
+                                <div class="achievement-info">
+                                    <h4>Aventurero</h4>
+                                    <p>Completa 10 experiencias</p>
+                                </div>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Configuración -->
+                    <section class="settings-section">
+                        <h3 class="section-title">Configuración</h3>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-bell"></i>
+                                    <div>
+                                        <h4>Notificaciones</h4>
+                                        <p>Gestiona tus alertas</p>
+                                    </div>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="notifications" checked onchange="toggleSetting(this)">
+                                    <label for="notifications"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <h4>Ubicación</h4>
+                                        <p>Compartir ubicación</p>
+                                    </div>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="location" checked onchange="toggleSetting(this)">
+                                    <label for="location"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-moon"></i>
+                                    <div>
+                                        <h4>Modo Oscuro</h4>
+                                        <p>Tema de la aplicación</p>
+                                    </div>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="darkMode" onchange="toggleDarkMode(this)">
+                                    <label for="darkMode"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item clickable" onclick="showPrivacyModal()">
+                                <div class="setting-info">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div>
+                                        <h4>Privacidad</h4>
+                                        <p>Gestiona tus datos</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="setting-item clickable" onclick="showHelpModal()">
+                                <div class="setting-info">
+                                    <i class="fas fa-question-circle"></i>
+                                    <div>
+                                        <h4>Ayuda y Soporte</h4>
+                                        <p>Centro de ayuda</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <nav class="bottom-nav">
+                    <a href="/mobile" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="/mobile/mapas" class="nav-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Mapas</span>
+                    </a>
+                    <a href="/mobile/guardados" class="nav-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Guardados</span>
+                    </a>
+                    <a href="/mobile/perfil" class="nav-item active">
+                        <i class="fas fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-to-website">
+        <i class="fas fa-arrow-left"></i>
+        Volver al sitio web
+    </a>
+
+    <script>
+        // Funcionalidades del perfil
+        function togglePreference(card) {
+            card.classList.toggle('active');
+            const preference = card.getAttribute('data-preference');
+            const isActive = card.classList.contains('active');
+            
+            showToast(`${preference.charAt(0).toUpperCase() + preference.slice(1)} ${isActive ? 'agregada' : 'removida'} de preferencias`);
+        }
+
+        function toggleSetting(checkbox) {
+            const setting = checkbox.id;
+            const isEnabled = checkbox.checked;
+            
+            showToast(`${setting.charAt(0).toUpperCase() + setting.slice(1)} ${isEnabled ? 'activado' : 'desactivado'}`);
+        }
+
+        function toggleDarkMode(checkbox) {
+            document.body.classList.toggle('dark-mode', checkbox.checked);
+            localStorage.setItem('darkMode', checkbox.checked);
+            showToast(`Modo ${checkbox.checked ? 'oscuro' : 'claro'} activado`);
+        }
+
+        function editAvatar() {
+            showToast('Funcionalidad de edición de avatar en desarrollo');
+        }
+
+        function openSettings() {
+            showToast('Configuración avanzada');
+        }
+
+        // Modales
+        function showPrivacyModal() {
+            const modalHTML = `
+                <div class="modal-overlay active" id="privacyModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Privacidad y Datos</h3>
+                            <button class="close-modal" onclick="closeModal('privacyModal')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="privacy-options">
+                            <div class="privacy-option" onclick="manageData()">
+                                <div class="option-info">
+                                    <i class="fas fa-database"></i>
+                                    <div>
+                                        <h4>Gestionar Datos</h4>
+                                        <p>Controla tu información personal</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="privacy-option" onclick="exportData()">
+                                <div class="option-info">
+                                    <i class="fas fa-download"></i>
+                                    <div>
+                                        <h4>Exportar Datos</h4>
+                                        <p>Descarga tu información</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="privacy-option" onclick="deleteAccount()">
+                                <div class="option-info">
+                                    <i class="fas fa-trash"></i>
+                                    <div>
+                                        <h4>Eliminar Cuenta</h4>
+                                        <p>Borrar permanentemente tu cuenta</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            document.getElementById('privacyModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal('privacyModal');
+                }
+            });
+        }
+
+        function showHelpModal() {
+            const modalHTML = `
+                <div class="modal-overlay active" id="helpModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Ayuda y Soporte</h3>
+                            <button class="close-modal" onclick="closeModal('helpModal')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="help-options">
+                            <div class="help-option" onclick="openHelpCenter()">
+                                <div class="option-info">
+                                    <i class="fas fa-question-circle"></i>
+                                    <div>
+                                        <h4>Centro de Ayuda</h4>
+                                        <p>Encuentra respuestas a tus preguntas</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="help-option" onclick="contactSupport()">
+                                <div class="option-info">
+                                    <i class="fas fa-headset"></i>
+                                    <div>
+                                        <h4>Contactar Soporte</h4>
+                                        <p>Habla con nuestro equipo</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            
+                            <div class="help-option" onclick="sendFeedback()">
+                                <div class="option-info">
+                                    <i class="fas fa-comment-dots"></i>
+                                    <div>
+                                        <h4>Enviar Feedback</h4>
+                                        <p>Comparte tus sugerencias</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            document.getElementById('helpModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal('helpModal');
+                }
+            });
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Funciones de los botones de privacidad
+        function manageData() {
+            showToast('Abriendo gestión de datos...');
+        }
+
+        function exportData() {
+            showToast('Preparando exportación de datos...');
+        }
+
+        function deleteAccount() {
+            if (confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.')) {
+                showToast('Solicitud de eliminación enviada');
+            }
+        }
+
+        // Funciones de los botones de ayuda
+        function openHelpCenter() {
+            showToast('Abriendo centro de ayuda...');
+        }
+
+        function contactSupport() {
+            showToast('Conectando con soporte...');
+        }
+
+        function sendFeedback() {
+            showToast('Abriendo formulario de feedback...');
+        }
+
+        // Toast notifications
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Cargar preferencias al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar modo oscuro
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            const darkModeToggle = document.getElementById('darkMode');
+            if (darkModeToggle) {
+                darkModeToggle.checked = savedDarkMode;
+                document.body.classList.toggle('dark-mode', savedDarkMode);
+            }
+        });
+    </script>
+</body>
+</html>

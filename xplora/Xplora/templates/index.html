@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xplora - Turismo en Chía, Tabio y Cajicá</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-compass"></i>
+                <span>Xplora</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#experiencias">Experiencias</a></li>
+                <li><a href="#municipios">Municipios</a></li>
+                <li><a href="#emprendedores">Emprendedores</a></li>
+                <li><a href="#app">App Móvil</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <a href="/mobile" class="btn-mobile">Ver App</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Descubre la auténtica esencia de <span class="highlight">Chía, Tabio y Cajicá</span></h1>
+            <p>Conectamos viajeros con experiencias locales únicas, promoviendo el turismo sostenible y el desarrollo comunitario</p>
+            <div class="hero-buttons">
+                <a href="#experiencias" class="btn btn-primary">Explorar Experiencias</a>
+                <a href="#emprendedores" class="btn btn-secondary">
+                    <i class="fas fa-store"></i>
+                    Conocer Emprendedores
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="floating-card">
+                <div class="floating-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span>Gastronomía Local</span>
+            </div>
+            <div class="floating-card">
+                <div class="floating-icon">
+                    <i class="fas fa-hiking"></i>
+                </div>
+                <span>Rutas Ecológicas</span>
+            </div>
+            <div class="floating-card">
+                <div class="floating-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <span>Cultura Viva</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Experiencias Únicas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">80+</div>
+                    <div class="stat-label">Emprendedores Locales</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Municipios Conectados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.8★</div>
+                    <div class="stat-label">Rating de la Comunidad</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiencias Section -->
+    <section id="experiencias" class="experiencias">
+        <div class="container">
+            <h2>Experiencias Auténticas</h2>
+            <p class="section-subtitle">Descubre lo mejor de cada municipio a través de experiencias verificadas y recomendadas por la comunidad local</p>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="gastronomia">Gastronomía</button>
+                <button class="filter-btn" data-filter="ecoturismo">Ecoturismo</button>
+                <button class="filter-btn" data-filter="cultura">Cultura</button>
+                <button class="filter-btn" data-filter="artesania">Artesanías</button>
+            </div>
+
+            <div class="experiencias-grid">
+                <div class="experiencia-card" data-category="gastronomia">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                        <div class="category-tag">Gastronomía</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Ruta Gastronómica Chía</h3>
+                        <p>Descubre los sabores auténticos de la región en un recorrido por los mejores restaurantes y mercados locales.</p>
+                        <div class="card-footer">
+                            <span class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Chía
+                            </span>
+                            <div class="card-actions">
+                                <button class="btn-card" onclick="guardarExperiencia(1)">
+                                    <i class="far fa-heart"></i>
+                                    Guardar
+                                </button>
+                                <button class="btn-card" onclick="compartirExperiencia(1)">
+                                    <i class="fas fa-share-alt"></i>
+                                    Compartir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experiencia-card" data-category="ecoturismo">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                        <div class="category-tag">Ecoturismo</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Senderos Ecológicos Tabio</h3>
+                        <p>Caminata guiada por paisajes naturales únicos y cascadas escondidas en las montañas de Tabio.</p>
+                        <div class="card-footer">
+                            <span class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Tabio
+                            </span>
+                            <div class="card-actions">
+                                <button class="btn-card" onclick="guardarExperiencia(2)">
+                                    <i class="far fa-heart"></i>
+                                    Guardar
+                                </button>
+                                <button class="btn-card" onclick="compartirExperiencia(2)">
+                                    <i class="fas fa-share-alt"></i>
+                                    Compartir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experiencia-card" data-category="cultura">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1515586838455-8f8f940d6853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                        <div class="category-tag">Cultura</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Tour Cultural Cajicá</h3>
+                        <p>Recorrido histórico por el patrimonio colonial y tradiciones locales en el corazón de Cajicá.</p>
+                        <div class="card-footer">
+                            <span class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Cajicá
+                            </span>
+                            <div class="card-actions">
+                                <button class="btn-card" onclick="guardarExperiencia(3)">
+                                    <i class="far fa-heart"></i>
+                                    Guardar
+                                </button>
+                                <button class="btn-card" onclick="compartirExperiencia(3)">
+                                    <i class="fas fa-share-alt"></i>
+                                    Compartir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experiencia-card" data-category="artesania">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80')">
+                        <div class="category-tag">Artesanías</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Taller de Artesanías Locales</h3>
+                        <p>Aprende técnicas tradicionales de artesanía con maestros locales y crea tu propia pieza única.</p>
+                        <div class="card-footer">
+                            <span class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Chía
+                            </span>
+                            <div class="card-actions">
+                                <button class="btn-card" onclick="guardarExperiencia(4)">
+                                    <i class="far fa-heart"></i>
+                                    Guardar
+                                </button>
+                                <button class="btn-card" onclick="compartirExperiencia(4)">
+                                    <i class="fas fa-share-alt"></i>
+                                    Compartir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experiencia-card" data-category="gastronomia">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                        <div class="category-tag">Gastronomía</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Mercado Campesino Tabio</h3>
+                        <p>Vive la experiencia de un mercado tradicional con productos frescos directamente de los agricultores locales.</p>
+                        <div class="card-footer">
+                            <span class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Tabio
+                            </span>
+                            <div class="card-actions">
+                                <button class="btn-card" onclick="guardarExperiencia(5)">
+                                    <i class="far fa-heart"></i>
+                                    Guardar
+                                </button>
+                                <button class="btn-card" onclick="compartirExperiencia(5)">
+                                    <i class="fas fa-share-alt"></i>
+                                    Compartir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experiencia-card" data-category="ecoturismo">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                        <div class="category-tag">Ecoturismo</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Aguas Termales Naturales</h3>
+                        <p>Relájate en las aguas termales naturales rodeado de paisajes campestres y montañas.</p>
+                        <div class="card-footer">
+                            <span class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Tabio
+                            </span>
+                            <div class="card-actions">
+                                <button class="btn-card" onclick="guardarExperiencia(6)">
+                                    <i class="far fa-heart"></i>
+                                    Guardar
+                                </button>
+                                <button class="btn-card" onclick="compartirExperiencia(6)">
+                                    <i class="fas fa-share-alt"></i>
+                                    Compartir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Municipios Section -->
+    <section id="municipios" class="municipios">
+        <div class="container">
+            <h2>Nuestros Municipios</h2>
+            <p class="section-subtitle">Descubre la riqueza cultural y natural de cada destino</p>
+            <div class="municipios-grid">
+                <div class="municipio-card">
+                    <div class="municipio-image" style="background-image: url('https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                        <div class="municipio-overlay">
+                            <h3>Chía</h3>
+                            <p>Capital de la Luna</p>
+                        </div>
+                    </div>
+                    <div class="municipio-info">
+                        <p>Conocida como la "Capital de la Luna", ofrece una mezcla perfecta entre tradición y modernidad, con paisajes únicos y una vibrante escena gastronómica.</p>
+                        <div class="municipio-stats">
+                            <div class="municipio-stat">
+                                <strong>45+</strong>
+                                <span>Experiencias</span>
+                            </div>
+                            <div class="municipio-stat">
+                                <strong>25+</strong>
+                                <span>Emprendedores</span>
+                            </div>
+                            <div class="municipio-stat">
+                                <strong>4.7★</strong>
+                                <span>Rating</span>
+                            </div>
+                        </div>
+                        <a href="#experiencias" class="btn-municipio">Descubrir Chía</a>
+                    </div>
+                </div>
+                
+                <div class="municipio-card">
+                    <div class="municipio-image" style="background-image: url('https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                        <div class="municipio-overlay">
+                            <h3>Tabio</h3>
+                            <p>Aguas Termales</p>
+                        </div>
+                    </div>
+                    <div class="municipio-info">
+                        <p>Famoso por sus aguas termales y paisajes campestres, ideal para el descanso, relax y conexión con la naturaleza en estado puro.</p>
+                        <div class="municipio-stats">
+                            <div class="municipio-stat">
+                                <strong>35+</strong>
+                                <span>Experiencias</span>
+                            </div>
+                            <div class="municipio-stat">
+                                <strong>18+</strong>
+                                <span>Emprendedores</span>
+                            </div>
+                            <div class="municipio-stat">
+                                <strong>4.8★</strong>
+                                <span>Rating</span>
+                            </div>
+                        </div>
+                        <a href="#experiencias" class="btn-municipio">Descubrir Tabio</a>
+                    </div>
+                </div>
+                
+                <div class="municipio-card">
+                    <div class="municipio-image" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                        <div class="municipio-overlay">
+                            <h3>Cajicá</h3>
+                            <p>Patrimonio Colonial</p>
+                        </div>
+                    </div>
+                    <div class="municipio-info">
+                        <p>Pueblo lleno de encanto con una rica historia colonial, tradiciones vivas y una ubicación privilegiada en la sabana de Bogotá.</p>
+                        <div class="municipio-stats">
+                            <div class="municipio-stat">
+                                <strong>40+</strong>
+                                <span>Experiencias</span>
+                            </div>
+                            <div class="municipio-stat">
+                                <strong>22+</strong>
+                                <span>Emprendedores</span>
+                            </div>
+                            <div class="municipio-stat">
+                                <strong>4.6★</strong>
+                                <span>Rating</span>
+                            </div>
+                        </div>
+                        <a href="#experiencias" class="btn-municipio">Descubrir Cajicá</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emprendedores Section -->
+    <section id="emprendedores" class="emprendedores">
+        <div class="container">
+            <h2>Conoce a Nuestros Emprendedores</h2>
+            <p class="section-subtitle">Apoyamos el talento local y promovemos el desarrollo económico de la región</p>
+            
+            <div class="emprendedores-grid">
+                <div class="emprendedor-card">
+                    <div class="emprendedor-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&h=100&fit=face')"></div>
+                    <h3>María González</h3>
+                    <span class="emprendedor-categoria">Gastronomía</span>
+                    <p>"Doña María" - Restaurante tradicional con 20 años de experiencia en comida típica chia.</p>
+                    <div class="emprendedor-contacto">
+                        <span><i class="fas fa-map-marker-alt"></i> Chía</span>
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                    </div>
+                </div>
+
+                <div class="emprendedor-card">
+                    <div class="emprendedor-avatar" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&h=100&fit=face')"></div>
+                    <h3>Carlos Rodríguez</h3>
+                    <span class="emprendedor-categoria">Ecoturismo</span>
+                    <p>Guía certificado con amplio conocimiento de los senderos ecológicos de Tabio.</p>
+                    <div class="emprendedor-contacto">
+                        <span><i class="fas fa-map-marker-alt"></i> Tabio</span>
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                    </div>
+                </div>
+
+                <div class="emprendedor-card">
+                    <div class="emprendedor-avatar" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&h=100&fit=face')"></div>
+                    <h3>Ana Martínez</h3>
+                    <span class="emprendedor-categoria">Artesanías</span>
+                    <p>Artesana especializada en tejidos tradicionales y productos hechos a mano.</p>
+                    <div class="emprendedor-contacto">
+                        <span><i class="fas fa-map-marker-alt"></i> Cajicá</span>
+                        <span><i class="fas fa-star"></i> 4.7</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="emprendedores-cta">
+                <h3>¿Eres emprendedor local?</h3>
+                <p>Únete a nuestra plataforma y haz visible tu negocio ante miles de visitantes</p>
+                <a href="#contacto" class="btn btn-primary">Registrar Mi Emprendimiento</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Section -->
+    <section id="app" class="app-section">
+        <div class="container">
+            <div class="app-content">
+                <div class="app-info">
+                    <h2>Explora con Nuestra App <span class="highlight">Xplora</span></h2>
+                    <p>Lleva la experiencia completa en tu móvil. Descubre lugares, guarda tus favoritos y conéctate con la comunidad local.</p>
+                    
+                    <div class="app-features">
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Mapas Interactivos</h4>
+                                <p>Navegación offline y rutas personalizadas por los municipios</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Guardar Favoritos</h4>
+                                <p>Crea tu lista personalizada de experiencias por descubrir</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Experiencias Verificadas</h4>
+                                <p>Todas nuestras experiencias son auténticas y locales</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Comunidad Local</h4>
+                                <p>Conecta directamente con emprendedores y guías locales</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="app-download">
+                        <a href="/mobile" class="btn btn-primary btn-large">
+                            <i class="fas fa-mobile-alt"></i>
+                            Probar App Web
+                        </a>
+                        <div class="download-stats">
+                            <div class="stat">
+                                <strong>4.8</strong>
+                                <span>Rating</span>
+                            </div>
+                            <div class="stat">
+                                <strong>5K+</strong>
+                                <span>Usuarios Activos</span>
+                            </div>
+                            <div class="stat">
+                                <strong>150+</strong>
+                                <span>Experiencias</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-preview">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="app-screenshot" style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80')"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-compass"></i>
+                        <span>Xplora</span>
+                    </div>
+                    <p>Plataforma digital que centraliza y visibiliza la oferta turística, cultural y ecológica de Chía, Tabio y Cajicá.</p>
+                    <div class="newsletter">
+                        <h4>Únete a nuestra comunidad</h4>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Tu correo electrónico">
+                            <button class="btn-newsletter">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> Xplora@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +57 311 517 9554</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Chía, Cundinamarca</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#experiencias">Experiencias</a></li>
+                        <li><a href="#municipios">Municipios</a></li>
+                        <li><a href="#emprendedores">Emprendedores</a></li>
+                        <li><a href="#app">App Móvil</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <div class="app-badges">
+                        <div class="app-badge">
+                            <i class="fab fa-google-play"></i>
+                            <div>
+                                <span>Disponible en</span>
+                                <strong>Google Play</strong>
+                            </div>
+                        </div>
+                        <div class="app-badge">
+                            <i class="fab fa-app-store"></i>
+                            <div>
+                                <span>Descarga en</span>
+                                <strong>App Store</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Xplora. Todos los derechos reservados. | Conectando viajeros con la esencia local</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        function guardarExperiencia(id) {
+            // Simular guardado de experiencia
+            const btn = event.target.closest('.btn-card');
+            const icon = btn.querySelector('i');
+            
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                btn.style.color = 'var(--secondary)';
+                showToast('Experiencia guardada en favoritos');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                btn.style.color = '';
+                showToast('Experiencia removida de favoritos');
+            }
+        }
+
+        function compartirExperiencia(id) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Xplora - Experiencia Única',
+                    text: 'Mira esta experiencia increíble que encontré en Xplora',
+                    url: window.location.href + '#experiencia-' + id
+                });
+            } else {
+                showToast('Enlace copiado al portapapeles');
+            }
+        }
+
+        function showToast(message) {
+            // Crear toast notification
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--primary);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xplora - Guardados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <div class="app-container">
+                <header class="app-header">
+                    <div class="header-content">
+                        <a href="/mobile" class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <h2>Mis Guardados</h2>
+                        <div class="user-actions">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="app-main">
+                    <!-- Filtros -->
+                    <section class="filters-section">
+                        <div class="filters-tabs">
+                            <button class="filter-tab active" data-filter="all">
+                                <i class="fas fa-star"></i>
+                                <span>Todos</span>
+                            </button>
+                            <button class="filter-tab" data-filter="gastronomia">
+                                <i class="fas fa-utensils"></i>
+                                <span>Gastronomía</span>
+                            </button>
+                            <button class="filter-tab" data-filter="ecoturismo">
+                                <i class="fas fa-hiking"></i>
+                                <span>Ecoturismo</span>
+                            </button>
+                            <button class="filter-tab" data-filter="cultura">
+                                <i class="fas fa-landmark"></i>
+                                <span>Cultura</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Lista de guardados -->
+                    <section class="saved-section">
+                        {% if experiencias %}
+                        <div class="saved-list">
+                            {% for experiencia in experiencias %}
+                            <div class="saved-item" data-category="{{ experiencia.categoria }}">
+                                <div class="item-image" style="background-image: url('{{ experiencia.imagen }}')">
+                                    <button class="remove-btn" onclick="removeFromSaved({{ experiencia.id }})">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    <div class="item-badge {{ experiencia.categoria }}">
+                                        {{ experiencia.categoria | title }}
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <h3>{{ experiencia.titulo }}</h3>
+                                    <p>{{ experiencia.descripcion }}</p>
+                                    <div class="item-meta">
+                                        <div class="meta-left">
+                                            <div class="meta-item">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                <span>{{ experiencia.municipio }}</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <i class="fas fa-clock"></i>
+                                                <span>{{ experiencia.duracion }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="price-tag">
+                                            {{ experiencia.precio }}
+                                        </div>
+                                    </div>
+                                    <div class="item-actions">
+                                        <button class="btn btn-secondary btn-sm" onclick="shareExperience({{ experiencia.id }})">
+                                            <i class="fas fa-share"></i>
+                                            Compartir
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" onclick="window.location.href='/mobile/experiencia/{{ experiencia.id }}'">
+                                            <i class="fas fa-eye"></i>
+                                            Ver Detalles
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <!-- Estado vacío -->
+                        <div class="empty-state">
+                            <div class="empty-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3>No hay experiencias guardadas</h3>
+                            <p>Guarda tus experiencias favoritas para acceder a ellas rápidamente</p>
+                            <button class="btn btn-primary" onclick="window.location.href='/mobile'">
+                                <i class="fas fa-compass"></i>
+                                Explorar Experiencias
+                            </button>
+                        </div>
+                        {% endif %}
+                    </section>
+
+                    <!-- Recomendaciones -->
+                    <section class="recommendations-section">
+                        <h3 class="section-title">Te podría gustar</h3>
+                        <div class="recommendations-carousel">
+                            <div class="recommendation-card">
+                                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&h=200&fit=crop')">
+                                    <div class="card-badge gastronomia">Gastronomía</div>
+                                </div>
+                                <div class="card-content">
+                                    <h4>Taller de Cocina Local</h4>
+                                    <p>Aprende recetas tradicionales con chefs expertos</p>
+                                    <div class="card-actions">
+                                        <button class="save-btn" onclick="addToSaved(4)">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <nav class="bottom-nav">
+                    <a href="/mobile" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="/mobile/mapas" class="nav-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Mapas</span>
+                    </a>
+                    <a href="/mobile/guardados" class="nav-item active">
+                        <i class="fas fa-heart"></i>
+                        <span>Guardados</span>
+                    </a>
+                    <a href="/mobile/perfil" class="nav-item">
+                        <i class="fas fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-to-website">
+        <i class="fas fa-arrow-left"></i>
+        Volver al sitio web
+    </a>
+
+    <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+    <script>
+        function removeFromSaved(experienceId) {
+            if (confirm('¿Quieres eliminar esta experiencia de tus guardados?')) {
+                // Aquí iría la lógica para eliminar de guardados
+                showToast('Experiencia eliminada de guardados');
+                // Recargar la página o actualizar la UI
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+        }
+
+        function addToSaved(experienceId) {
+            // Aquí iría la lógica para agregar a guardados
+            showToast('Experiencia agregada a guardados');
+        }
+
+        function shareExperience(experienceId) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Xplora - Experiencia Única',
+                    text: 'Mira esta experiencia increíble que encontré en Xplora',
+                    url: window.location.origin + '/mobile/experiencia/' + experienceId
+                });
+            } else {
+                // Fallback para navegadores que no soportan Web Share API
+                showToast('Enlace copiado al portapapeles');
+            }
+        }
+
+        // Filtrado de guardados
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const items = document.querySelectorAll('.saved-item');
+                
+                items.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

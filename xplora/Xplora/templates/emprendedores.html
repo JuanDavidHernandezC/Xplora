@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xplora - Emprendedores Locales</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <div class="app-container">
+                <header class="app-header">
+                    <div class="header-content">
+                        <a href="/mobile" class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <h2>Emprendedores Locales</h2>
+                        <div class="user-actions">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="app-main">
+                    <!-- Filtros -->
+                    <section class="filters-section">
+                        <div class="filters-tabs">
+                            <button class="filter-tab active" data-filter="all">Todos</button>
+                            <button class="filter-tab" data-filter="gastronomia">Gastronomía</button>
+                            <button class="filter-tab" data-filter="ecoturismo">Ecoturismo</button>
+                            <button class="filter-tab" data-filter="cultura">Cultura</button>
+                            <button class="filter-tab" data-filter="artesania">Artesanías</button>
+                        </div>
+                    </section>
+
+                    <!-- Lista de Emprendedores -->
+                    <section class="emprendedores-list-section">
+                        {% for emprendedor in emprendedores %}
+                        <div class="emprendedor-detalle-card">
+                            <div class="emprendedor-header">
+                                <div class="emprendedor-avatar" style="background-image: url('{{ emprendedor.imagen }}')"></div>
+                                <div class="emprendedor-basic-info">
+                                    <h3>{{ emprendedor.nombre }}</h3>
+                                    <span class="emprendedor-categoria">{{ emprendedor.categoria }}</span>
+                                    <div class="emprendedor-meta">
+                                        <span class="location">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            {{ emprendedor.municipio }}
+                                        </span>
+                                        <span class="rating">
+                                            <i class="fas fa-star"></i>
+                                            {{ emprendedor.rating }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <button class="btn-seguir {% if loop.index % 2 == 0 %}following{% endif %}" 
+                                        onclick="toggleSeguir({{ emprendedor.id }})">
+                                    <i class="fas {% if loop.index % 2 == 0 %}fa-check{% else %}fa-plus{% endif %}"></i>
+                                    {{ 'Siguiendo' if loop.index % 2 == 0 else 'Seguir' }}
+                                </button>
+                            </div>
+                            
+                            <div class="emprendedor-descripcion">
+                                <p>{{ emprendedor.descripcion }}</p>
+                            </div>
+
+                            <div class="emprendedor-experiencias">
+                                <h4>Experiencias Destacadas</h4>
+                                <div class="experiencias-mini">
+                                    {% for exp_id in emprendedor.experiencias %}
+                                    {% set exp = experiencias | selectattr('id', 'equalto', exp_id) | first %}
+                                    {% if exp %}
+                                    <div class="experiencia-mini-card" onclick="window.location.href='/mobile/experiencia/{{ exp.id }}'">
+                                        <div class="mini-image" style="background-image: url('{{ exp.imagen }}')"></div>
+                                        <div class="mini-info">
+                                            <h5>{{ exp.titulo }}</h5>
+                                            <div class="mini-rating">
+                                                <i class="fas fa-star"></i>
+                                                <span>{{ exp.rating }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="emprendedor-contacto">
+                                <button class="btn-contacto" onclick="contactarEmprendedor({{ emprendedor.id }})">
+                                    <i class="fas fa-envelope"></i>
+                                    Contactar
+                                </button>
+                                <button class="btn-contacto" onclick="compartirEmprendedor({{ emprendedor.id }})">
+                                    <i class="fas fa-share-alt"></i>
+                                    Compartir
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </section>
+
+                    <!-- CTA para emprendedores -->
+                    <section class="cta-emprendedores">
+                        <div class="cta-content">
+                            <h3>¿Eres emprendedor local?</h3>
+                            <p>Únete a Xplora y haz visible tu negocio ante miles de visitantes interesados en experiencias auténticas</p>
+                            <button class="btn btn-primary btn-large" onclick="registrarEmprendimiento()">
+                                <i class="fas fa-store"></i>
+                                Registrar Mi Emprendimiento
+                            </button>
+                        </div>
+                    </section>
+                </main>
+
+                <nav class="bottom-nav">
+                    <a href="/mobile" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Descubrir</span>
+                    </a>
+                    <a href="/mobile/mapas" class="nav-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Mapas</span>
+                    </a>
+                    <a href="/mobile/guardados" class="nav-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Guardados</span>
+                    </a>
+                    <a href="/mobile/perfil" class="nav-item">
+                        <i class="fas fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-to-website">
+        <i class="fas fa-arrow-left"></i>
+        Volver al sitio web
+    </a>
+
+    <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+    <script>
+        function toggleSeguir(emprendedorId) {
+            const btn = event.target.closest('.btn-seguir');
+            const icon = btn.querySelector('i');
+            
+            if (btn.classList.contains('following')) {
+                btn.classList.remove('following');
+                icon.classList.remove('fa-check');
+                icon.classList.add('fa-plus');
+                btn.innerHTML = '<i class="fas fa-plus"></i> Seguir';
+                showToast('Dejaste de seguir a este emprendedor');
+            } else {
+                btn.classList.add('following');
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-check');
+                btn.innerHTML = '<i class="fas fa-check"></i> Siguiendo';
+                showToast('Ahora sigues a este emprendedor');
+            }
+        }
+
+        function contactarEmprendedor(emprendedorId) {
+            showToast('Redirigiendo a contacto...');
+            // Aquí iría la lógica de contacto
+        }
+
+        function compartirEmprendedor(emprendedorId) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Xplora - Emprendedor Local',
+                    text: 'Mira este increíble emprendedor local que encontré en Xplora',
+                    url: window.location.href
+                });
+            } else {
+                showToast('Enlace copiado al portapapeles');
+            }
+        }
+
+        function registrarEmprendimiento() {
+            showToast('Redirigiendo al formulario de registro...');
+            // Aquí iría la lógica de registro
+        }
+
+        // Filtrado de emprendedores
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                showToast(`Mostrando emprendedores de: ${filter}`);
+                // Aquí iría la lógica de filtrado real
+            });
+        });
+    </script>
+</body>
+</html>

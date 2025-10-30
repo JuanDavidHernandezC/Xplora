@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xplora - {{ experiencia.titulo if experiencia else 'Experiencia' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <div class="app-container">
+                <header class="app-header">
+                    <div class="header-content">
+                        <a href="javascript:history.back()" class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <h2>Detalles</h2>
+                        <div class="user-actions">
+                            <i class="fas fa-share-alt" onclick="shareExperience()"></i>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="app-main">
+                    {% if experiencia %}
+                    <!-- Galería -->
+                    <section class="gallery-section">
+                        <div class="experience-gallery">
+                            <div class="main-image" style="background-image: url('{{ experiencia.imagen }}')">
+                                <div class="gallery-overlay">
+                                    <div class="experience-badge {{ experiencia.categoria }}">
+                                        {{ experiencia.categoria | title }}
+                                    </div>
+                                    <button class="save-experience-btn" onclick="toggleSaveExperience()">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Información principal -->
+                    <section class="info-section">
+                        <div class="experience-header">
+                            <h1>{{ experiencia.titulo }}</h1>
+                            <div class="rating-container">
+                                <div class="stars">
+                                    {% for i in range(5) %}
+                                    <i class="fas fa-star {% if i < experiencia.rating | int %}filled{% endif %}"></i>
+                                    {% endfor %}
+                                </div>
+                                <span class="rating-text">{{ experiencia.rating }} (124 reviews)</span>
+                            </div>
+                        </div>
+
+                        <div class="experience-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Ubicación</strong>
+                                    <span>{{ experiencia.municipio }}, Cundinamarca</span>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Duración</strong>
+                                    <span>{{ experiencia.duracion }}</span>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-user-tie"></i>
+                                <div>
+                                    <strong>Emprendedor</strong>
+                                    <span>{{ experiencia.emprendedor }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Descripción -->
+                    <section class="description-section">
+                        <h3 class="section-title">Sobre esta experiencia</h3>
+                        <div class="description-content">
+                            <p>{{ experiencia.descripcion }}</p>
+                            <p>Sumérgete en una aventura única donde podrás conectar con la cultura local, disfrutar de paisajes impresionantes y crear recuerdos inolvidables.</p>
+                        </div>
+                    </section>
+
+                    <!-- Recomendaciones -->
+                    <section class="recommendations-section">
+                        <h3 class="section-title">📋 Recomendaciones</h3>
+                        <div class="recommendations-list">
+                            {% for recomendacion in experiencia.recomendaciones %}
+                            <div class="recommendation-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>{{ recomendacion }}</span>
+                            </div>
+                            {% endfor %}
+                            <div class="recommendation-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Llevar cámara para fotos</span>
+                            </div>
+                            <div class="recommendation-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Perfecto para familias</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Emprendedor -->
+                    <section class="emprendedor-section">
+                        <h3 class="section-title">👨‍🍳 Conoce al Emprendedor</h3>
+                        <div class="emprendedor-card-detalle">
+                            <div class="emprendedor-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face')"></div>
+                            <div class="emprendedor-info">
+                                <h4>{{ experiencia.emprendedor }}</h4>
+                                <p>Especialista en {{ experiencia.categoria }} con años de experiencia local</p>
+                                <div class="emprendedor-stats">
+                                    <span class="rating">
+                                        <i class="fas fa-star"></i>
+                                        4.9
+                                    </span>
+                                    <span class="experiencias">
+                                        <i class="fas fa-compass"></i>
+                                        15 experiencias
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="btn-seguir" onclick="seguirEmprendedor()">
+                                <i class="fas fa-plus"></i>
+                                Seguir
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Experiencias Similares -->
+                    <section class="similar-section">
+                        <h3 class="section-title">🔄 Experiencias Similares</h3>
+                        <div class="similar-carousel">
+                            <div class="similar-card" onclick="window.location.href='/mobile/experiencia/2'">
+                                <div class="similar-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=150&fit=crop')"></div>
+                                <div class="similar-info">
+                                    <h4>Senderos Ecológicos</h4>
+                                    <p>Tabio · Ecoturismo</p>
+                                    <div class="similar-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Acciones -->
+                    <section class="actions-section">
+                        <div class="action-buttons">
+                            <button class="btn-action primary" onclick="guardarExperiencia()">
+                                <i class="far fa-heart"></i>
+                                Guardar
+                            </button>
+                            <button class="btn-action secondary" onclick="compartirExperiencia()">
+                                <i class="fas fa-share-alt"></i>
+                                Compartir
+                            </button>
+                            <button class="btn-action tertiary" onclick="verEnMapa()">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Ver en Mapa
+                            </button>
+                        </div>
+                    </section>
+
+                    {% else %}
+                    <!-- Estado de error -->
+                    <div class="error-state">
+                        <div class="error-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3>Experiencia no encontrada</h3>
+                        <p>La experiencia que buscas no está disponible en este momento.</p>
+                        <button class="btn btn-primary" onclick="window.location.href='/mobile'">
+                            <i class="fas fa-compass"></i>
+                            Explorar Otras Experiencias
+                        </button>
+                    </div>
+                    {% endif %}
+                </main>
+
+                <nav class="bottom-nav">
+                    <a href="/mobile" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Descubrir</span>
+                    </a>
+                    <a href="/mobile/mapas" class="nav-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Mapas</span>
+                    </a>
+                    <a href="/mobile/guardados" class="nav-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Guardados</span>
+                    </a>
+                    <a href="/mobile/perfil" class="nav-item">
+                        <i class="fas fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-to-website">
+        <i class="fas fa-arrow-left"></i>
+        Volver al sitio web
+    </a>
+
+    <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+    <script>
+        let isSaved = false;
+        let isFollowing = false;
+
+        function toggleSaveExperience() {
+            isSaved = !isSaved;
+            const btn = document.querySelector('.save-experience-btn');
+            const actionBtn = document.querySelector('.btn-action.primary');
+            
+            if (isSaved) {
+                btn.innerHTML = '<i class="fas fa-heart"></i>';
+                btn.style.color = 'var(--secondary)';
+                actionBtn.innerHTML = '<i class="fas fa-heart"></i> Guardado';
+                showToast('Experiencia guardada en favoritos');
+            } else {
+                btn.innerHTML = '<i class="far fa-heart"></i>';
+                btn.style.color = 'white';
+                actionBtn.innerHTML = '<i class="far fa-heart"></i> Guardar';
+                showToast('Experiencia removida de favoritos');
+            }
+        }
+
+        function guardarExperiencia() {
+            toggleSaveExperience();
+        }
+
+        function seguirEmprendedor() {
+            isFollowing = !isFollowing;
+            const btn = document.querySelector('.btn-seguir');
+            
+            if (isFollowing) {
+                btn.innerHTML = '<i class="fas fa-check"></i> Siguiendo';
+                btn.style.background = 'var(--success)';
+                showToast('Ahora sigues a este emprendedor');
+            } else {
+                btn.innerHTML = '<i class="fas fa-plus"></i> Seguir';
+                btn.style.background = 'var(--primary)';
+                showToast('Dejaste de seguir a este emprendedor');
+            }
+        }
+
+        function compartirExperiencia() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Xplora - {{ experiencia.titulo }}',
+                    text: 'Mira esta experiencia increíble en Xplora: {{ experiencia.descripcion }}',
+                    url: window.location.href
+                });
+            } else {
+                showToast('Enlace copiado al portapapeles');
+            }
+        }
+
+        function shareExperience() {
+            compartirExperiencia();
+        }
+
+        function verEnMapa() {
+            showToast('Abriendo en mapas...');
+            // Aquí iría la lógica para abrir en maps
+        }
+    </script>
+</body>
+</html>
