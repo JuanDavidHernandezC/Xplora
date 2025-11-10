@@ -6,81 +6,240 @@
     <title>Xplora - Turismo en Chía, Tabio y Cajicá</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos adicionales para el modal de lugares */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            font-size: 1.8rem;
+        }
+        
+        .location-list {
+            list-style-type: none;
+        }
+        
+        .location-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .location-item:last-child {
+            border-bottom: none;
+        }
+        
+        .location-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .location-address {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .btn-lugares {
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-lugares:hover {
+            background-color: #A0522D;
+            transform: translateY(-2px);
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .no-data i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+        
+        .no-data h3 {
+            margin-bottom: 10px;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header Mejorado y Profesional -->
     <header class="header">
         <nav class="nav">
-            <div class="logo">
-                <i class="fas fa-compass"></i>
-                <span>Xplora</span>
+            <div class="nav-brand">
+                <a href="#" class="logo">
+                    <i class="fas fa-compass"></i>
+                    <span>Xplora</span>
+                </a>
             </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#experiencias">Experiencias</a></li>
-                <li><a href="#municipios">Municipios</a></li>
-                <li><a href="#emprendedores">Emprendedores</a></li>
-                <li><a href="#app">App Móvil</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-            <a href="/mobile" class="btn-mobile">Ver App</a>
+            
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#experiencias" class="nav-link">Experiencias</a></li>
+                    <li><a href="#municipios" class="nav-link">Municipios</a></li>
+                    <li><a href="#emprendedores" class="nav-link">Emprendedores</a></li>
+                    <li><a href="#app" class="nav-link">App Móvil</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <a href="/mobile" class="btn-mobile">
+                        <i class="fas fa-mobile-alt"></i>
+                        Ver App
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section Mejorada -->
     <section id="inicio" class="hero">
         <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
+            <div class="hero-badge">
+                <span>Turismo Sostenible</span>
+            </div>
             <h1>Descubre la auténtica esencia de <span class="highlight">Chía, Tabio y Cajicá</span></h1>
             <p>Conectamos viajeros con experiencias locales únicas, promoviendo el turismo sostenible y el desarrollo comunitario</p>
             <div class="hero-buttons">
-                <a href="#experiencias" class="btn btn-primary">Explorar Experiencias</a>
+                <a href="#experiencias" class="btn btn-primary">
+                    <i class="fas fa-map-marked-alt"></i>
+                    Explorar Experiencias
+                </a>
                 <a href="#emprendedores" class="btn btn-secondary">
                     <i class="fas fa-store"></i>
                     Conocer Emprendedores
                 </a>
+                <a href="#emprendedores-cta" class="btn btn-accent">
+                    <i class="fas fa-plus-circle"></i>
+                    Registrar Mi Emprendimiento
+                </a>
+            </div>
+            <div class="hero-features">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Experiencias Verificadas</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-leaf"></i>
+                    <span>Turismo Sostenible</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>Comunidad Local</span>
+                </div>
             </div>
         </div>
-        <div class="hero-image">
-            <div class="floating-card">
-                <div class="floating-icon">
-                    <i class="fas fa-utensils"></i>
+        <div class="hero-municipios">
+            <div class="municipio-cuadrante">
+                <div class="municipio-imagen" style="background-image: url('https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                    <div class="municipio-overlay">
+                        <h3>Chía</h3>
+                        <p>Capital de la Luna</p>
+                    </div>
                 </div>
-                <span>Gastronomía Local</span>
             </div>
-            <div class="floating-card">
-                <div class="floating-icon">
-                    <i class="fas fa-hiking"></i>
+            <div class="municipio-cuadrante">
+                <div class="municipio-imagen" style="background-image: url('https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                    <div class="municipio-overlay">
+                        <h3>Tabio</h3>
+                        <p>Aguas Termales</p>
+                    </div>
                 </div>
-                <span>Rutas Ecológicas</span>
             </div>
-            <div class="floating-card">
-                <div class="floating-icon">
-                    <i class="fas fa-landmark"></i>
+            <div class="municipio-cuadrante">
+                <div class="municipio-imagen" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                    <div class="municipio-overlay">
+                        <h3>Cajicá</h3>
+                        <p>Patrimonio Colonial</p>
+                    </div>
                 </div>
-                <span>Cultura Viva</span>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
+    <!-- Stats Section Mejorada -->
     <section class="stats-section">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
                     <div class="stat-number">150+</div>
                     <div class="stat-label">Experiencias Únicas</div>
                 </div>
                 <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
                     <div class="stat-number">80+</div>
                     <div class="stat-label">Emprendedores Locales</div>
                 </div>
                 <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
                     <div class="stat-number">3</div>
                     <div class="stat-label">Municipios Conectados</div>
                 </div>
                 <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
                     <div class="stat-number">4.8★</div>
                     <div class="stat-label">Rating de la Comunidad</div>
                 </div>
@@ -91,8 +250,10 @@
     <!-- Experiencias Section -->
     <section id="experiencias" class="experiencias">
         <div class="container">
-            <h2>Experiencias Auténticas</h2>
-            <p class="section-subtitle">Descubre lo mejor de cada municipio a través de experiencias verificadas y recomendadas por la comunidad local</p>
+            <div class="section-header">
+                <h2>Experiencias Auténticas</h2>
+                <p class="section-subtitle">Descubre lo mejor de cada municipio a través de experiencias verificadas y recomendadas por la comunidad local</p>
+            </div>
             
             <div class="filters">
                 <button class="filter-btn active" data-filter="all">Todas</button>
@@ -102,7 +263,116 @@
                 <button class="filter-btn" data-filter="artesania">Artesanías</button>
             </div>
 
-            <div class="experiencias-grid">
+            <!-- Selector de Municipio para Gastronomía -->
+            <div id="municipio-selector" class="municipio-selector" style="display: none;">
+                <h3>Selecciona un municipio para explorar su gastronomía</h3>
+                <div class="municipio-buttons">
+                    <button class="municipio-btn active" data-municipio="all">Todos</button>
+                    <button class="municipio-btn" data-municipio="chia">Chía</button>
+                    <button class="municipio-btn" data-municipio="tabio">Tabio</button>
+                    <button class="municipio-btn" data-municipio="cajica">Cajicá</button>
+                </div>
+            </div>
+
+            <!-- Carrusel de Gastronomía Mejorado (inicialmente oculto) -->
+            <div id="gastronomia-carousel" class="gastronomia-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-content">
+                        <div class="carousel-info">
+                            <div class="dish-info">
+                                <div class="dish-header">
+                                    <h3 class="dish-name">Mute Santafereño</h3>
+                                    <div class="dish-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.8</span>
+                                    </div>
+                                </div>
+                                <p class="dish-description">Una sopa espesa y sustanciosa preparada con carne de res, cerdo, pollo, costilla, mondongo y una variedad de verduras como papa, yuca, mazorca y garbanzos. Se sirve con arroz y aguacate.</p>
+                                <div class="dish-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Tabio</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>30 minutos</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-user-friends"></i>
+                                        <span>1-2 personas</span>
+                                    </div>
+                                </div>
+                                <button class="btn-lugares" data-dish="Mute Santafereño">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Ver lugares donde probarlo
+                                </button>
+                                <div class="dish-actions">
+                                    <button class="btn btn-secondary" onclick="guardarExperiencia(1)">
+                                        <i class="far fa-heart"></i>
+                                        Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-image">
+                            <div class="main-image">
+                                <img src="https://i.ytimg.com/vi/aqr8nF2YIE8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDrxZ24RJzEYZFvwL9EosItickW5g" alt="Mute Santandereano">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-thumbnails">
+                        <div class="thumbnail active" data-slide="0">
+                            <div class="thumbnail-image">
+                                <img src="https://i.ytimg.com/vi/aqr8nF2YIE8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDrxZ24RJzEYZFvwL9EosItickW5g" alt="Mute Santandereano">
+                            </div>
+                            <span class="thumbnail-name">Mute</span>
+                        </div>
+                        <div class="thumbnail" data-slide="1">
+                            <div class="thumbnail-image">
+                                <img src="https://img-global.cpcdn.com/recipes/7e9561ebcd80ac0b/1200x630cq80/photo.jpg" alt="Ajiaco Santafereño">
+                            </div>
+                            <span class="thumbnail-name">Ajiaco</span>
+                        </div>
+                        <div class="thumbnail" data-slide="2">
+                            <div class="thumbnail-image">
+                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKcFFpymzKBode2X5TussSHv5Mb9LnoF6Y1D5mzq4ocBUjGHtz-_ILSOaU8L_WYs6LXVeZxTaqFNnIS5q3JkH7p_M9cl7yQQEZ6kr0qGuEPHtGG6aIqhyphenhyphenxinO-S0vh0T_JNB7mX9o7dFO4HUx3jR6dyEAH9Z2XoSWNXeGAyiJr8XwvhZ7se4axNMFBePk/s1600/cuchuco-de-trigo-con-espinazo.jpg" alt="Cuchuco de Trigo">
+                            </div>
+                            <span class="thumbnail-name">Cuchuco</span>
+                        </div>
+                        <div class="thumbnail" data-slide="3">
+                            <div class="thumbnail-image">
+                                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/semana/ILFZDXEB5REPPI7AQMVJTXIWBQ.jpg" alt="Fritanga">
+                            </div>
+                            <span class="thumbnail-name">Fritanga</span>
+                        </div>
+                        <div class="thumbnail" data-slide="4">
+                            <div class="thumbnail-image">
+                                <img src="https://i.pinimg.com/736x/86/e3/f7/86e3f7a3469e5b8f29626c646a65bbc1.jpg" alt="Tamal Santafereño">
+                            </div>
+                            <span class="thumbnail-name">Tamal</span>
+                        </div>
+                        <div class="thumbnail" data-slide="5">
+                            <div class="thumbnail-image">
+                                <img src="https://www.lechedeflorida.com/file/267/changua.jpg" alt="Changua con Huevo">
+                            </div>
+                            <span class="thumbnail-name">Changua</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid de experiencias (se muestra por defecto) -->
+            <div class="experiencias-grid" id="experiencias-grid">
                 <div class="experiencia-card" data-category="gastronomia">
                     <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
                         <div class="category-tag">Gastronomía</div>
@@ -289,8 +559,10 @@
     <!-- Municipios Section -->
     <section id="municipios" class="municipios">
         <div class="container">
-            <h2>Nuestros Municipios</h2>
-            <p class="section-subtitle">Descubre la riqueza cultural y natural de cada destino</p>
+            <div class="section-header">
+                <h2>Nuestros Municipios</h2>
+                <p class="section-subtitle">Descubre la riqueza cultural y natural de cada destino</p>
+            </div>
             <div class="municipios-grid">
                 <div class="municipio-card">
                     <div class="municipio-image" style="background-image: url('https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
@@ -376,11 +648,13 @@
         </div>
     </section>
 
-    <!-- Emprendedores Section -->
+    <!-- Emprendedores Section con funcionalidad de mostrar/ocultar -->
     <section id="emprendedores" class="emprendedores">
         <div class="container">
-            <h2>Conoce a Nuestros Emprendedores</h2>
-            <p class="section-subtitle">Apoyamos el talento local y promovemos el desarrollo económico de la región</p>
+            <div class="section-header">
+                <h2>Conoce a Nuestros Emprendedores</h2>
+                <p class="section-subtitle">Apoyamos el talento local y promovemos el desarrollo económico de la región</p>
+            </div>
             
             <div class="emprendedores-grid">
                 <div class="emprendedor-card">
@@ -406,7 +680,7 @@
                 </div>
 
                 <div class="emprendedor-card">
-                    <div class="emprendedor-avatar" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&h=100&fit=face')"></div>
+                    <div class="emprendedor-avatar" style="background-image: url('https://www.xxi-banorte.com/wp-content/uploads/2024/03/La-importancia-de-las-mujeres-emprendedoras-en-Mexico.webp')"></div>
                     <h3>Ana Martínez</h3>
                     <span class="emprendedor-categoria">Artesanías</span>
                     <p>Artesana especializada en tejidos tradicionales y productos hechos a mano.</p>
@@ -417,11 +691,160 @@
                 </div>
             </div>
 
-            <div class="emprendedores-cta">
+            <div id="emprendedores-cta" class="emprendedores-cta">
                 <h3>¿Eres emprendedor local?</h3>
                 <p>Únete a nuestra plataforma y haz visible tu negocio ante miles de visitantes</p>
-                <a href="#contacto" class="btn btn-primary">Registrar Mi Emprendimiento</a>
+                <button id="toggle-registro-btn" class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i>
+                    Registrar Mi Emprendimiento
+                </button>
             </div>
+        </div>
+    </section>
+
+    <!-- Registro Emprendimiento Section - Inicialmente oculta -->
+    <section id="registro-emprendimiento" class="registro-emprendimiento" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Registra Tu Emprendimiento</h2>
+                <p class="section-subtitle">Completa el formulario para unirte a nuestra plataforma y llegar a más visitantes</p>
+            </div>
+            
+            <form class="form-registro" id="formRegistro">
+                <div class="form-section">
+                    <h3><i class="fas fa-info-circle"></i> Información Básica</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nombre">Nombre del Emprendimiento *</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo">Tipo de Negocio *</label>
+                            <select id="tipo" name="tipo" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="restaurante">Restaurante</option>
+                                <option value="alojamiento">Alojamiento</option>
+                                <option value="artesania">Artesanías</option>
+                                <option value="turismo">Turismo</option>
+                                <option value="comercio">Comercio</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="descripcion">Descripción *</label>
+                            <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono de Contacto *</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sitio-web">Sitio Web (opcional)</label>
+                            <input type="url" id="sitio-web" name="sitio-web">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Ubicación</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="municipio">Municipio *</label>
+                            <select id="municipio" name="municipio" required>
+                                <option value="">Selecciona un municipio</option>
+                                <option value="chia">Chía</option>
+                                <option value="tabio">Tabio</option>
+                                <option value="cajica">Cajicá</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección *</label>
+                            <input type="text" id="direccion" name="direccion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="coordenadas">Coordenadas (opcional)</label>
+                            <input type="text" id="coordenadas" name="coordenadas" placeholder="Latitud, Longitud">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de horarios mejorada -->
+                <div class="form-section">
+                    <h3><i class="fas fa-clock"></i> Horarios de Atención</h3>
+                    <div class="horarios-container">
+                        <div class="horarios-grid">
+                            <div class="horario-item">
+                                <label>Lunes</label>
+                                <div class="time-inputs">
+                                    <input type="time" name="lunes-inicio">
+                                    <span>a</span>
+                                    <input type="time" name="lunes-fin">
+                                </div>
+                            </div>
+                            <div class="horario-item">
+                                <label>Martes</label>
+                                <div class="time-inputs">
+                                    <input type="time" name="martes-inicio">
+                                    <span>a</span>
+                                    <input type="time" name="martes-fin">
+                                </div>
+                            </div>
+                            <div class="horario-item">
+                                <label>Miércoles</label>
+                                <div class="time-inputs">
+                                    <input type="time" name="miercoles-inicio">
+                                    <span>a</span>
+                                    <input type="time" name="miercoles-fin">
+                                </div>
+                            </div>
+                            <div class="horario-item">
+                                <label>Jueves</label>
+                                <div class="time-inputs">
+                                    <input type="time" name="jueves-inicio">
+                                    <span>a</span>
+                                    <input type="time" name="jueves-fin">
+                                </div>
+                            </div>
+                            <div class="horario-item">
+                                <label>Viernes</label>
+                                <div class="time-inputs">
+                                    <input type="time" name="viernes-inicio">
+                                    <span>a</span>
+                                    <input type="time" name="viernes-fin">
+                                </div>
+                            </div>
+                            <div class="horario-item">
+                                <label>Sábado</label>
+                                <div class="time-inputs">
+                                    <input type="time" name="sabado-inicio">
+                                    <span>a</span>
+                                    <input type="time" name="sabado-fin">
+                                </div>
+                            </div>
+                            <div class="horario-item">
+                                <label>Domingo</label>
+                                <div class="time-inputs">
+                                    <input type="time" name="domingo-inicio">
+                                    <span>a</span>
+                                    <input type="time" name="domingo-fin">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Solicitud
+                    </button>
+                    <button type="reset" class="btn btn-secondary">Limpiar Formulario</button>
+                </div>
+            </form>
         </div>
     </section>
 
@@ -585,61 +1008,631 @@
         </div>
     </footer>
 
+    <!-- Modal para mostrar lugares -->
+    <div class="modal" id="locationsModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-title" id="modalDishTitle">Lugares para probar [Plato]</h3>
+            <ul class="location-list" id="locationList">
+                <!-- Los lugares se cargarán dinámicamente aquí -->
+            </ul>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script>
-        function guardarExperiencia(id) {
-            // Simular guardado de experiencia
-            const btn = event.target.closest('.btn-card');
-            const icon = btn.querySelector('i');
-            
-            if (icon.classList.contains('far')) {
-                icon.classList.remove('far');
-                icon.classList.add('fas');
-                btn.style.color = 'var(--secondary)';
-                showToast('Experiencia guardada en favoritos');
-            } else {
-                icon.classList.remove('fas');
-                icon.classList.add('far');
-                btn.style.color = '';
-                showToast('Experiencia removida de favoritos');
+        // Datos actualizados para la gastronomía de Tabio, Cajicá y Chía
+        const gastronomiaData = [
+            // Platos de Tabio
+            {
+                id: 1,
+                name: "Mute Santafereño",
+                description: "Una sopa espesa y sustanciosa preparada con carne de res, cerdo, pollo, costilla, mondongo y una variedad de verduras como papa, yuca, mazorca y garbanzos. Se sirve con arroz y aguacate.",
+                image: "https://i.ytimg.com/vi/aqr8nF2YIE8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDrxZ24RJzEYZFvwL9EosItickW5g",
+                location: "Tabio",
+                duration: "30 minutos",
+                groupSize: "1-2 personas",
+                rating: "4.8",
+                municipio: "tabio"
+            },
+            {
+                id: 2,
+                name: "Ajiaco Santafereño",
+                description: "Sopa tradicional colombiana preparada con tres tipos de papa, pollo, mazorca de maíz, guascas y alcaparras. Se sirve con crema de leche y aguacate, siendo un plato emblemático de la región.",
+                image: "https://img-global.cpcdn.com/recipes/7e9561ebcd80ac0b/1200x630cq80/photo.jpg",
+                location: "Tabio",
+                duration: "2.5 horas",
+                groupSize: "2-8 personas",
+                rating: "4.7",
+                municipio: "tabio"
+            },
+            {
+                id: 3,
+                name: "Cuchuco de Trigo con Espinazo",
+                description: "Sopa espesa preparada con cuchuco (trigo partido), espinazo de cerdo, habas, arvejas y papa. Un plato reconfortante típico de la región andina colombiana.",
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKcFFpymzKBode2X5TussSHv5Mb9LnoF6Y1D5mzq4ocBUjGHtz-_ILSOaU8L_WYs6LXVeZxTaqFNnIS5q3JkH7p_M9cl7yQQEZ6kr0qGuEPHtGG6aIqhyphenhyphenxinO-S0vh0T_JNB7mX9o7dFO4HUx3jR6dyEAH9Z2XoSWNXeGAyiJr8XwvhZ7se4axNMFBePk/s1600/cuchuco-de-trigo-con-espinazo.jpg",
+                location: "Tabio",
+                duration: "1.5 horas",
+                groupSize: "2-4 personas",
+                rating: "4.5",
+                municipio: "tabio"
+            },
+            {
+                id: 4,
+                name: "Fritanga",
+                description: "Combinación de carnes como chorizo, morcilla, costilla, chicharrón, papa criolla, yuca frita y arepa. Se acompaña con ají picante y es ideal para compartir en reuniones familiares.",
+                image: "https://cloudfront-us-east-1.images.arcpublishing.com/semana/ILFZDXEB5REPPI7AQMVJTXIWBQ.jpg",
+                location: "Tabio",
+                duration: "2 horas",
+                groupSize: "3-8 personas",
+                rating: "4.6",
+                municipio: "tabio"
+            },
+            {
+                id: 5,
+                name: "Tamal Santafereño",
+                description: "Masa de maíz rellena con carne de cerdo, pollo, zanahoria, arvejas, garbanzos y huevo cocido, envuelta en hojas de plátano y cocida al vapor. Tradicionalmente se consume en desayunos especiales.",
+                image: "https://i.pinimg.com/736x/86/e3/f7/86e3f7a3469e5b8f29626c646a65bbc1.jpg",
+                location: "Tabio",
+                duration: "1 hora",
+                groupSize: "1-4 personas",
+                rating: "4.4",
+                municipio: "tabio"
+            },
+            {
+                id: 6,
+                name: "Changua con Huevo",
+                description: "Sopa caliente preparada con leche, agua, cebolla larga, cilantro y un huevo crudo que se cocina en la sopa. Se sirve con pan o arepa y es típica de los desayunos en la región.",
+                image: "https://www.lechedeflorida.com/file/267/changua.jpg",
+                location: "Tabio",
+                duration: "45 minutos",
+                groupSize: "1-2 personas",
+                rating: "4.3",
+                municipio: "tabio"
+            },
+            // Platos de Cajicá
+            {
+                id: 7,
+                name: "Lechona Cajiqueña",
+                description: "Plato tradicional preparado con cerdo relleno de arroz, garbanzos, cebolla y especias, cocido lentamente en horno de barro. Especialidad de la región con un sabor único.",
+                image: "https://elreydelalechona.co/wp-content/uploads/2025/09/plato-de-lechona-1.jpg",
+                location: "Cajicá",
+                duration: "6-8 horas",
+                groupSize: "4-10 personas",
+                rating: "4.9",
+                municipio: "cajica"
+            },
+            {
+                id: 8,
+                name: "Mazamorra Chiquita",
+                description: "Bebida tradicional a base de maíz trillado, cocido con panela y canela. Se sirve caliente y es ideal para acompañar con queso o almojábanas.",
+                image: "https://i.ytimg.com/vi/QGBOfCEW5w8/maxresdefault.jpg",
+                location: "Cajicá",
+                duration: "1 hora",
+                groupSize: "1-4 personas",
+                rating: "4.6",
+                municipio: "cajica"
+            },
+            {
+                id: 9,
+                name: "Arepas de Chócolo con Queso",
+                description: "Arepas dulces hechas con maíz tierno, acompañadas de queso fresco campesino. Un desayuno típico de la región que combina lo dulce y lo salado.",
+                image: "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/3DY5P2KU5ZEZVCELFKFJHCV2UE.jpg",
+                location: "Cajicá",
+                duration: "30 minutos",
+                groupSize: "1-2 personas",
+                rating: "4.7",
+                municipio: "cajica"
+            },
+            {
+                id: 10,
+                name: "Mondongo Cajiqueño",
+                description: "Sopa espesa preparada con mondongo (callos de res), verduras, maíz y especias. Un plato reconfortante tradicional de los domingos familiares.",
+                image: "https://images.aws.nestle.recipes/original/ecbd41cfa335aaf5f2fd95cca26d04ce_mondongo.jpeg",
+                location: "Cajicá",
+                duration: "3 horas",
+                groupSize: "2-6 personas",
+                rating: "4.5",
+                municipio: "cajica"
+            },
+            {
+                id: 11,
+                name: "Almojábanas",
+                description: "Panecillos de queso y almidón de yuca, horneados hasta obtener una textura suave por dentro y crujiente por fuera. Perfectos para el desayuno o la merienda.",
+                image: "https://misaboracolombia.com/cdn/shop/articles/almojabana_principal_1200x1200.jpg?v=1638489840",
+                location: "Cajicá",
+                duration: "45 minutos",
+                groupSize: "2-4 personas",
+                rating: "4.8",
+                municipio: "cajica"
+            },
+            // Platos de Chía
+            {
+                id: 12,
+                name: "Ajiaco Chiano",
+                description: "Variación del tradicional ajiaco santafereño, preparado con pollo criollo, papas sabaneras y guascas frescas de la región. Se sirve con crema de leche y alcaparras.",
+                image: "https://mojo.generalmills.com/api/public/content/lWuocevZmkK6Iq3JG_OZUw_gmi_hi_res_jpeg.jpeg?v=c23ac952&t=16e3ce250f244648bef28c5949fb99ff",
+                location: "Chía",
+                duration: "2 horas",
+                groupSize: "2-6 personas",
+                rating: "4.7",
+                municipio: "chia"
+            },
+            {
+                id: 13,
+                name: "Empanadas de Pipián",
+                description: "Empanadas rellenas de pipián, una mezcla de papa, maní y especias típicas de la región. Fritas hasta quedar doradas y crujientes.",
+                image: "https://comopreparar.co/wp-content/uploads/2024/06/Empanadas-de-pipian-480x270.webp",
+                location: "Chía",
+                duration: "1 hora",
+                groupSize: "2-4 personas",
+                rating: "4.6",
+                municipio: "chia"
+            },
+            {
+                id: 14,
+                name: "Sobrebarriga a la Chiana",
+                description: "Corte de sobrebarriga cocido lentamente en salsa de tomate, cebolla y especias, acompañado de papa pastusa y yuca. Un plato contundente y lleno de sabor.",
+                image: "https://i.ytimg.com/vi/FxvhoiNMycM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCS3iAycfn0NzFAYdmlZ7ztUoW0QA",
+                location: "Chía",
+                duration: "2.5 horas",
+                groupSize: "2-4 personas",
+                rating: "4.8",
+                municipio: "chia"
+            },
+            {
+                id: 15,
+                name: "Postre de Natas",
+                description: "Postre tradicional hecho con natas de leche, azúcar y canela, cocido a fuego lento hasta obtener una textura cremosa. Se sirve frío con galletas.",
+                image: "https://cdn.colombia.com/gastronomia/2011/07/25/postre-de-natas-1461.jpg",
+                location: "Chía",
+                duration: "1.5 horas",
+                groupSize: "2-6 personas",
+                rating: "4.9",
+                municipio: "chia"
+            },
+            {
+                id: 16,
+                name: "Caldo de Costilla",
+                description: "Caldo reconstituyente preparado con costilla de res, papa, cebolla larga y cilantro. Ideal para comenzar el día con energía o recuperarse del frío.",
+                image: "https://www.unileverfoodsolutions.com.co/dam/global-ufs/mcos/nola/colombia/calcmenu/recipes/CO-recipes/soups/caldo-de-costilla/main-header.jpg",
+                location: "Chía",
+                duration: "1 hora",
+                groupSize: "1-2 personas",
+                rating: "4.5",
+                municipio: "chia"
             }
-        }
+        ];
 
-        function compartirExperiencia(id) {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Xplora - Experiencia Única',
-                    text: 'Mira esta experiencia increíble que encontré en Xplora',
-                    url: window.location.href + '#experiencia-' + id
+        // Datos de lugares para cada plato en todos los municipios
+        const locationsData = {
+            // Lugares en Tabio
+            "Mute Santafereño": [
+                { name: "Restaurante La Casona", address: "Carrera 5 #10-25, Centro, Tabio" },
+                { name: "Fonda Doña Rosa", address: "Calle 8 #5-30, Barrio El Centro, Tabio" },
+                { name: "Asadero El Tabiuno", address: "Vía Principal, Salida a Tenjo, Tabio" }
+            ],
+            "Ajiaco Santafereño": [
+                { name: "Restaurante Mi Tierra", address: "Carrera 3 #8-15, Centro, Tabio" },
+                { name: "Fonda La Abuela", address: "Calle 10 #4-20, Barrio San Antonio, Tabio" },
+                { name: "Comedor Doña Carmen", address: "Plaza Principal, Tabio" }
+            ],
+            "Cuchuco de Trigo con Espinazo": [
+                { name: "Fonda El Fogón", address: "Carrera 6 #9-12, Centro, Tabio" },
+                { name: "Restaurante Sabores de mi Tierra", address: "Calle 7 #5-18, Tabio" }
+            ],
+            "Fritanga": [
+                { name: "Asadero El Rincón Tabiuno", address: "Carrera 4 #7-22, Centro, Tabio" },
+                { name: "Fonda La Esquina", address: "Calle 9 #6-14, Tabio" },
+                { name: "Parilladas Don José", address: "Vía a Tenjo Km 2, Tabio" }
+            ],
+            "Tamal Santafereño": [
+                { name: "Panadería La Esperanza", address: "Carrera 5 #8-10, Centro, Tabio" },
+                { name: "Fonda Doña Julia", address: "Calle 6 #4-25, Tabio" },
+                { name: "Mercado Municipal", address: "Carrera 2 #5-30, Tabio" }
+            ],
+            "Changua con Huevo": [
+                { name: "Cafetería El Amanecer", address: "Carrera 4 #9-15, Centro, Tabio" },
+                { name: "Panadería San Isidro", address: "Calle 8 #5-12, Tabio" },
+                { name: "Fonda La Mañanera", address: "Carrera 3 #7-18, Tabio" }
+            ],
+            // Lugares en Cajicá
+            "Lechona Cajiqueña": [
+                { name: "Restaurante La Casona Colonial", address: "Carrera 4 #8-15, Centro, Cajicá" },
+                { name: "Asadero El Rincón Cajiqueño", address: "Calle 10 #5-20, Cajicá" },
+                { name: "Fonda Doña Tere", address: "Vía Principal, Cajicá" }
+            ],
+            "Mazamorra Chiquita": [
+                { name: "Cafetería La Tradición", address: "Carrera 5 #9-12, Centro, Cajicá" },
+                { name: "Panadería El Horno", address: "Calle 7 #4-18, Cajicá" },
+                { name: "Mercado Municipal de Cajicá", address: "Carrera 3 #6-22, Cajicá" }
+            ],
+            "Arepas de Chócolo con Queso": [
+                { name: "Desayunaderos El Amanecer", address: "Carrera 6 #10-25, Centro, Cajicá" },
+                { name: "Cafetería La Esquina Dulce", address: "Calle 9 #7-14, Cajicá" },
+                { name: "Panadería San José", address: "Carrera 2 #5-30, Cajicá" }
+            ],
+            "Mondongo Cajiqueño": [
+                { name: "Restaurante Sabores de mi Tierra", address: "Carrera 4 #8-20, Centro, Cajicá" },
+                { name: "Fonda Doña Carmen", address: "Calle 8 #6-18, Cajicá" },
+                { name: "Comedor Familiar", address: "Carrera 5 #7-22, Cajicá" }
+            ],
+            "Almojábanas": [
+                { name: "Panadería La Esperanza", address: "Carrera 3 #9-15, Centro, Cajicá" },
+                { name: "Cafetería El Rincón", address: "Calle 6 #5-12, Cajicá" },
+                { name: "Pastelería Doña Rosa", address: "Carrera 7 #8-25, Cajicá" }
+            ],
+            // Lugares en Chía
+            "Ajiaco Chiano": [
+                { name: "Restaurante La Luna", address: "Carrera 15 #20-35, Centro, Chía" },
+                { name: "Fonda Doña María", address: "Calle 18 #12-25, Chía" },
+                { name: "Comedor Campestre", address: "Vía a Cajicá Km 3, Chía" }
+            ],
+            "Empanadas de Pipián": [
+                { name: "Piqueteadero El Rincón", address: "Carrera 12 #18-30, Centro, Chía" },
+                { name: "Fritanga La Esquina", address: "Calle 20 #15-22, Chía" },
+                { name: "Mercado Municipal de Chía", address: "Carrera 10 #14-28, Chía" }
+            ],
+            "Sobrebarriga a la Chiana": [
+                { name: "Restaurante El Fogón", address: "Carrera 14 #16-32, Centro, Chía" },
+                { name: "Asadero Don Pedro", address: "Calle 22 #18-26, Chía" },
+                { name: "Comedor Doña Julia", address: "Carrera 8 #12-20, Chía" }
+            ],
+            "Postre de Natas": [
+                { name: "Pastelería La Dulce Tentación", address: "Carrera 16 #19-34, Centro, Chía" },
+                { name: "Repostería Doña Ana", address: "Calle 24 #20-28, Chía" },
+                { name: "Cafetería El Postre", address: "Carrera 11 #15-24, Chía" }
+            ],
+            "Caldo de Costilla": [
+                { name: "Desayunadero El Amanecer", address: "Carrera 13 #17-30, Centro, Chía" },
+                { name: "Cafetería La Mañana", address: "Calle 19 #14-22, Chía" },
+                { name: "Fonda Doña Carmen", address: "Carrera 9 #11-18, Chía" }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Funcionalidad para mostrar/ocultar el formulario de registro
+            const toggleBtn = document.getElementById('toggle-registro-btn');
+            const registroSection = document.getElementById('registro-emprendimiento');
+            
+            if (toggleBtn && registroSection) {
+                toggleBtn.addEventListener('click', function() {
+                    if (registroSection.style.display === 'none' || registroSection.style.display === '') {
+                        registroSection.style.display = 'block';
+                        registroSection.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        registroSection.style.display = 'none';
+                    }
                 });
-            } else {
-                showToast('Enlace copiado al portapapeles');
             }
-        }
+            
+            // Funcionalidad para filtros y carrusel de gastronomía
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const experienciaCards = document.querySelectorAll('.experiencia-card');
+            const gastronomiaCarousel = document.getElementById('gastronomia-carousel');
+            const experienciasGrid = document.getElementById('experiencias-grid');
+            const municipioSelector = document.getElementById('municipio-selector');
+            const municipioButtons = document.querySelectorAll('.municipio-btn');
+            let carouselInterval;
 
-        function showToast(message) {
-            // Crear toast notification
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = message;
-            toast.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: var(--primary);
-                color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                z-index: 1000;
-                animation: slideIn 0.3s ease;
-            `;
-            
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
-        }
+            // Inicialmente ocultar el carrusel y selector de municipio
+            gastronomiaCarousel.style.display = 'none';
+            municipioSelector.style.display = 'none';
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover clase active de todos los botones
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Añadir clase active al botón clickeado
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    // Si se selecciona gastronomía, mostrar carrusel y selector, ocultar grid
+                    if (filter === 'gastronomia') {
+                        gastronomiaCarousel.style.display = 'block';
+                        municipioSelector.style.display = 'block';
+                        experienciasGrid.style.display = 'none';
+                        startCarousel(); // Iniciar el carrusel automático
+                        updateCarouselByMunicipio('all'); // Mostrar todas las experiencias inicialmente
+                    } else {
+                        gastronomiaCarousel.style.display = 'none';
+                        municipioSelector.style.display = 'none';
+                        experienciasGrid.style.display = 'grid';
+                        stopCarousel(); // Detener el carrusel automático
+                    }
+
+                    // Filtrar las tarjetas de experiencias
+                    experienciaCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Funcionalidad para filtrado por municipio
+            municipioButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover clase active de todos los botones
+                    municipioButtons.forEach(btn => btn.classList.remove('active'));
+                    // Añadir clase active al botón clickeado
+                    button.classList.add('active');
+
+                    const municipio = button.getAttribute('data-municipio');
+                    updateCarouselByMunicipio(municipio);
+                    startCarousel(); // Reiniciar el carrusel automático
+                });
+            });
+
+            // Funcionalidad del carrusel
+            const prevButton = document.querySelector('.carousel-prev');
+            const nextButton = document.querySelector('.carousel-next');
+            let currentSlide = 0;
+            let filteredData = [...gastronomiaData];
+
+            function updateCarouselByMunicipio(municipio) {
+                if (municipio === 'all') {
+                    filteredData = [...gastronomiaData];
+                } else {
+                    filteredData = gastronomiaData.filter(item => item.municipio === municipio);
+                }
+                
+                // Si no hay datos, mostrar mensaje
+                if (filteredData.length === 0) {
+                    document.querySelector('.carousel-info').innerHTML = `
+                        <div class="no-data">
+                            <i class="fas fa-utensils"></i>
+                            <h3>Próximamente</h3>
+                            <p>Estamos trabajando en nuevas experiencias gastronómicas para este municipio.</p>
+                        </div>
+                    `;
+                    document.querySelector('.main-image img').src = 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+                    document.querySelector('.carousel-thumbnails').style.display = 'none';
+                    return;
+                }
+                
+                document.querySelector('.carousel-thumbnails').style.display = 'flex';
+                
+                // Actualizar el slide actual si es necesario
+                if (currentSlide >= filteredData.length) {
+                    currentSlide = 0;
+                }
+                
+                updateCarouselSlide(currentSlide);
+                updateThumbnails();
+            }
+
+            function updateCarouselSlide(slideIndex) {
+                const dish = filteredData[slideIndex];
+                if (!dish) return;
+                
+                document.querySelector('.dish-name').textContent = dish.name;
+                document.querySelector('.dish-description').textContent = dish.description;
+                document.querySelector('.main-image img').src = dish.image;
+                document.querySelector('.dish-rating span').textContent = dish.rating;
+                
+                const details = document.querySelector('.dish-details');
+                details.innerHTML = `
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${dish.location}</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span>${dish.duration}</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-user-friends"></i>
+                        <span>${dish.groupSize}</span>
+                    </div>
+                `;
+                
+                // Actualizar evento del botón guardar
+                const saveBtn = document.querySelector('.btn-secondary');
+                saveBtn.onclick = () => guardarExperiencia(dish.id);
+                
+                // Actualizar el botón de lugares
+                const lugaresBtn = document.querySelector('.btn-lugares');
+                lugaresBtn.setAttribute('data-dish', dish.name);
+            }
+
+            function updateThumbnails() {
+                const thumbnailsContainer = document.querySelector('.carousel-thumbnails');
+                thumbnailsContainer.innerHTML = '';
+                
+                filteredData.forEach((dish, index) => {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = `thumbnail ${index === currentSlide ? 'active' : ''}`;
+                    thumbnail.setAttribute('data-slide', index);
+                    
+                    thumbnail.innerHTML = `
+                        <div class="thumbnail-image">
+                            <img src="${dish.image}" alt="${dish.name}">
+                        </div>
+                        <span class="thumbnail-name">${dish.name.split(' ')[0]}</span>
+                    `;
+                    
+                    thumbnail.addEventListener('click', () => {
+                        goToSlide(index);
+                    });
+                    
+                    thumbnailsContainer.appendChild(thumbnail);
+                });
+            }
+
+            function goToSlide(slideIndex) {
+                currentSlide = slideIndex;
+                updateCarouselSlide(currentSlide);
+                
+                // Actualizar thumbnails
+                document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                    if (index === currentSlide) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % filteredData.length;
+                goToSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + filteredData.length) % filteredData.length;
+                goToSlide(currentSlide);
+            }
+
+            function startCarousel() {
+                stopCarousel();
+                if (filteredData.length > 1) {
+                    carouselInterval = setInterval(nextSlide, 10000); // Cambiar cada 10 segundos
+                }
+            }
+
+            function stopCarousel() {
+                if (carouselInterval) {
+                    clearInterval(carouselInterval);
+                }
+            }
+
+            // Event listeners para controles del carrusel
+            nextButton.addEventListener('click', () => {
+                nextSlide();
+                startCarousel();
+            });
+
+            prevButton.addEventListener('click', () => {
+                prevSlide();
+                startCarousel();
+            });
+
+            // Funcionalidad para el modal de lugares
+            const modal = document.getElementById('locationsModal');
+            const modalTitle = document.getElementById('modalDishTitle');
+            const locationList = document.getElementById('locationList');
+            const closeModal = document.querySelector('.close-modal');
+
+            // Abrir modal al hacer clic en "Ver lugares donde probarlo"
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('btn-lugares') || e.target.closest('.btn-lugares')) {
+                    const btn = e.target.classList.contains('btn-lugares') ? e.target : e.target.closest('.btn-lugares');
+                    const dishName = btn.getAttribute('data-dish');
+                    showLocations(dishName);
+                }
+            });
+
+            // Cerrar modal
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Cerrar modal al hacer clic fuera del contenido
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Función para mostrar los lugares de un plato específico
+            function showLocations(dishName) {
+                modalTitle.textContent = `Lugares para probar ${dishName}`;
+                locationList.innerHTML = '';
+                
+                if (locationsData[dishName]) {
+                    locationsData[dishName].forEach(location => {
+                        const li = document.createElement('li');
+                        li.className = 'location-item';
+                        li.innerHTML = `
+                            <div class="location-name">${location.name}</div>
+                            <div class="location-address">${location.address}</div>
+                        `;
+                        locationList.appendChild(li);
+                    });
+                } else {
+                    locationList.innerHTML = '<li class="location-item">No hay información de lugares disponibles para este plato.</li>';
+                }
+                
+                modal.style.display = 'flex';
+            }
+
+            // Funcionalidad existente para guardar y compartir experiencias
+            window.guardarExperiencia = function(id) {
+                const btn = event.target.closest('.btn-card, .btn-secondary');
+                const icon = btn.querySelector('i');
+                
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    btn.style.color = 'var(--secondary)';
+                    showToast('Experiencia guardada en favoritos');
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    btn.style.color = '';
+                    showToast('Experiencia removida de favoritos');
+                }
+            }
+
+            window.compartirExperiencia = function(id) {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Xplora - Experiencia Única',
+                        text: 'Mira esta experiencia increíble que encontré en Xplora',
+                        url: window.location.href + '#experiencia-' + id
+                    });
+                } else {
+                    showToast('Enlace copiado al portapapeles');
+                }
+            }
+
+            window.showToast = function(message) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                toast.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--primary);
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    z-index: 1000;
+                    animation: slideIn 0.3s ease;
+                `;
+                
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            }
+
+            // Funcionalidad para el menú móvil
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    navToggle.classList.toggle('active');
+                });
+            }
+
+            // Cerrar menú móvil al hacer clic en un enlace
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+        });
     </script>
 </body>
 </html>
