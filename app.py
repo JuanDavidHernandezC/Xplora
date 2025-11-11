@@ -60,7 +60,7 @@ EMPRENDEDORES = [
         'nombre': 'Doña María González',
         'categoria': 'Gastronomía',
         'descripcion': 'Especialista en comida tradicional chia con 20 años de experiencia',
-        'imagen': 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+        'imagen': 'https://generalcargo.net/wp-content/uploads/2023/04/AdobeStock_565116699-scaled.jpeg',
         'rating': 4.9,
         'municipio': 'Chía',
         'experiencias': [1]
