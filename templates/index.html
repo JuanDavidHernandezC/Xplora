@@ -89,6 +89,25 @@
             transform: translateY(-2px);
         }
         
+        /* Nuevos estilos para botones de encontrar */
+        .btn-encontrar {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-encontrar:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
         .no-data {
             text-align: center;
             padding: 40px 20px;
@@ -104,6 +123,254 @@
         .no-data h3 {
             margin-bottom: 10px;
             color: #888;
+        }
+        
+        /* Estilos para los nuevos carruseles */
+        .category-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px var(--shadow-dark);
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .carousel-container {
+            position: relative;
+            padding: 3rem;
+        }
+        
+        .carousel-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .carousel-info {
+            padding: 1rem;
+        }
+        
+        .experience-info h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            line-height: 1.2;
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .experience-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--background-alt);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .experience-rating i {
+            color: #FFD700;
+        }
+        
+        .experience-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .experience-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        .detail-item i {
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .experience-price {
+            margin-bottom: 2rem;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .price-note {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        .experience-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .carousel-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .thumbnail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+        
+        .thumbnail.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .thumbnail-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail.active .thumbnail-image {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .thumbnail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .thumbnail-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+            text-align: center;
+            max-width: 80px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        
+        .carousel-prev,
+        .carousel-next {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            pointer-events: all;
+        }
+        
+        .carousel-prev:hover,
+        .carousel-next:hover {
+            background: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+        }
+        
+        .no-data i {
+            font-size: 4rem;
+            color: var(--border);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .no-data h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .no-data p {
+            font-size: 1rem;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -185,7 +452,7 @@
         </div>
         <div class="hero-municipios">
             <div class="municipio-cuadrante">
-                <div class="municipio-imagen" style="background-image: url('https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                <div class="municipio-imagen" style="background-image: url('https://cdn.colombia.com/sdi/2024/08/29/que-hacer-en-el-municipio-de-chia-1252850.jpg')">
                     <div class="municipio-overlay">
                         <h3>Chía</h3>
                         <p>Capital de la Luna</p>
@@ -193,7 +460,7 @@
                 </div>
             </div>
             <div class="municipio-cuadrante">
-                <div class="municipio-imagen" style="background-image: url('https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                <div class="municipio-imagen" style="background-image: url('https://i.ytimg.com/vi/SP58GOoB66o/maxresdefault.jpg')">
                     <div class="municipio-overlay">
                         <h3>Tabio</h3>
                         <p>Aguas Termales</p>
@@ -201,7 +468,7 @@
                 </div>
             </div>
             <div class="municipio-cuadrante">
-                <div class="municipio-imagen" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                <div class="municipio-imagen" style="background-image: url('https://www.turismocajica.gov.co/wp-content/uploads/2023/09/Parque-Principal-Fotos-Cajica-2023-6-scaled.webp')">
                     <div class="municipio-overlay">
                         <h3>Cajicá</h3>
                         <p>Patrimonio Colonial</p>
@@ -264,7 +531,7 @@
             </div>
 
             <!-- Selector de Municipio para Gastronomía -->
-            <div id="municipio-selector" class="municipio-selector" style="display: none;">
+            <div id="gastronomia-municipio-selector" class="municipio-selector" style="display: none;">
                 <h3>Selecciona un municipio para explorar su gastronomía</h3>
                 <div class="municipio-buttons">
                     <button class="municipio-btn active" data-municipio="all">Todos</button>
@@ -275,20 +542,20 @@
             </div>
 
             <!-- Carrusel de Gastronomía Mejorado (inicialmente oculto) -->
-            <div id="gastronomia-carousel" class="gastronomia-carousel">
+            <div id="gastronomia-carousel" class="category-carousel">
                 <div class="carousel-container">
                     <div class="carousel-content">
                         <div class="carousel-info">
-                            <div class="dish-info">
-                                <div class="dish-header">
-                                    <h3 class="dish-name">Mute Santafereño</h3>
-                                    <div class="dish-rating">
+                            <div class="experience-info">
+                                <div class="experience-header">
+                                    <h3 class="experience-name">Mute Santafereño</h3>
+                                    <div class="experience-rating">
                                         <i class="fas fa-star"></i>
                                         <span>4.8</span>
                                     </div>
                                 </div>
-                                <p class="dish-description">Una sopa espesa y sustanciosa preparada con carne de res, cerdo, pollo, costilla, mondongo y una variedad de verduras como papa, yuca, mazorca y garbanzos. Se sirve con arroz y aguacate.</p>
-                                <div class="dish-details">
+                                <p class="experience-description">Una sopa espesa y sustanciosa preparada con carne de res, cerdo, pollo, costilla, mondongo y una variedad de verduras como papa, yuca, mazorca y garbanzos. Se sirve con arroz y aguacate.</p>
+                                <div class="experience-details">
                                     <div class="detail-item">
                                         <i class="fas fa-map-marker-alt"></i>
                                         <span>Tabio</span>
@@ -306,7 +573,7 @@
                                     <i class="fas fa-map-marker-alt"></i>
                                     Ver lugares donde probarlo
                                 </button>
-                                <div class="dish-actions">
+                                <div class="experience-actions">
                                     <button class="btn btn-secondary" onclick="guardarExperiencia(1)">
                                         <i class="far fa-heart"></i>
                                         Guardar
@@ -357,6 +624,309 @@
                                 <img src="https://www.lechedeflorida.com/file/267/changua.jpg" alt="Changua con Huevo">
                             </div>
                             <span class="thumbnail-name">Changua</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Selector de Municipio para Ecoturismo -->
+            <div id="ecoturismo-municipio-selector" class="municipio-selector" style="display: none;">
+                <h3>Selecciona un municipio para explorar su ecoturismo</h3>
+                <div class="municipio-buttons">
+                    <button class="municipio-btn active" data-municipio="all">Todos</button>
+                    <button class="municipio-btn" data-municipio="chia">Chía</button>
+                    <button class="municipio-btn" data-municipio="tabio">Tabio</button>
+                    <button class="municipio-btn" data-municipio="cajica">Cajicá</button>
+                </div>
+            </div>
+
+            <!-- Carrusel de Ecoturismo (inicialmente oculto) -->
+            <div id="ecoturismo-carousel" class="category-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-content">
+                        <div class="carousel-info">
+                            <div class="experience-info">
+                                <div class="experience-header">
+                                    <h3 class="experience-name">Termales de Tabio</h3>
+                                    <div class="experience-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9</span>
+                                    </div>
+                                </div>
+                                <p class="experience-description">Disfruta de las aguas termales naturales de Tabio, reconocidas por sus propiedades terapéuticas y relajantes. Un espacio perfecto para conectar con la naturaleza y revitalizar cuerpo y mente.</p>
+                                <div class="experience-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Tabio</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>3-4 horas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-user-friends"></i>
+                                        <span>1-6 personas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-temperature-high"></i>
+                                        <span>Aguas a 37-42°C</span>
+                                    </div>
+                                </div>
+                                <!-- BOTÓN AÑADIDO AQUÍ -->
+                                <button class="btn-encontrar" data-experience="Termales de Tabio">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Dónde encontrar estos termales
+                                </button>
+                                <div class="experience-actions">
+                                    <button class="btn btn-secondary" onclick="guardarExperiencia(7)">
+                                        <i class="far fa-heart"></i>
+                                        Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-image">
+                            <div class="main-image">
+                                <img src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Termales de Tabio">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-thumbnails">
+                        <div class="thumbnail active" data-slide="0">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Termales de Tabio">
+                            </div>
+                            <span class="thumbnail-name">Termales</span>
+                        </div>
+                        <div class="thumbnail" data-slide="1">
+                            <div class="thumbnail-image">
+                                <img src="https://www.alcaldiadetabio.gov.co/PublishingImages/Paginas/Jard%C3%ADn-Bot%C3%A1nico/JardinBotanico1.jpg" alt="Jardín Botánico">
+                            </div>
+                            <span class="thumbnail-name">Jardín Botánico</span>
+                        </div>
+                        <div class="thumbnail" data-slide="2">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Senderos Ecológicos">
+                            </div>
+                            <span class="thumbnail-name">Senderos</span>
+                        </div>
+                        <div class="thumbnail" data-slide="3">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Cascadas Naturales">
+                            </div>
+                            <span class="thumbnail-name">Cascadas</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Selector de Municipio para Cultura -->
+            <div id="cultura-municipio-selector" class="municipio-selector" style="display: none;">
+                <h3>Selecciona un municipio para explorar su cultura</h3>
+                <div class="municipio-buttons">
+                    <button class="municipio-btn active" data-municipio="all">Todos</button>
+                    <button class="municipio-btn" data-municipio="chia">Chía</button>
+                    <button class="municipio-btn" data-municipio="tabio">Tabio</button>
+                    <button class="municipio-btn" data-municipio="cajica">Cajicá</button>
+                </div>
+            </div>
+
+            <!-- Carrusel de Cultura (inicialmente oculto) -->
+            <div id="cultura-carousel" class="category-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-content">
+                        <div class="carousel-info">
+                            <div class="experience-info">
+                                <div class="experience-header">
+                                    <h3 class="experience-name">Tour Cultural Cajicá</h3>
+                                    <div class="experience-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.7</span>
+                                    </div>
+                                </div>
+                                <p class="experience-description">Recorrido histórico por el patrimonio colonial y tradiciones locales en el corazón de Cajicá. Descubre la arquitectura colonial, iglesias centenarias y la rica historia de este municipio.</p>
+                                <div class="experience-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Cajicá</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>2-3 horas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-user-friends"></i>
+                                        <span>2-10 personas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-landmark"></i>
+                                        <span>Patrimonio Colonial</span>
+                                    </div>
+                                </div>
+                                <!-- BOTÓN AÑADIDO AQUÍ -->
+                                <button class="btn-encontrar" data-experience="Tour Cultural Cajicá">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Dónde encontrar este tour
+                                </button>
+                                <div class="experience-actions">
+                                    <button class="btn btn-secondary" onclick="guardarExperiencia(8)">
+                                        <i class="far fa-heart"></i>
+                                        Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-image">
+                            <div class="main-image">
+                                <img src="https://images.unsplash.com/photo-1515586838455-8f8f940d6853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tour Cultural Cajicá">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-thumbnails">
+                        <div class="thumbnail active" data-slide="0">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1515586838455-8f8f940d6853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tour Cultural Cajicá">
+                            </div>
+                            <span class="thumbnail-name">Tour Cultural</span>
+                        </div>
+                        <div class="thumbnail" data-slide="1">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1583425423320-2386622cdadf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Museos Locales">
+                            </div>
+                            <span class="thumbnail-name">Museos</span>
+                        </div>
+                        <div class="thumbnail" data-slide="2">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Festivales Tradicionales">
+                            </div>
+                            <span class="thumbnail-name">Festivales</span>
+                        </div>
+                        <div class="thumbnail" data-slide="3">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Arquitectura Colonial">
+                            </div>
+                            <span class="thumbnail-name">Arquitectura</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Selector de Municipio para Artesanías -->
+            <div id="artesania-municipio-selector" class="municipio-selector" style="display: none;">
+                <h3>Selecciona un municipio para explorar sus artesanías</h3>
+                <div class="municipio-buttons">
+                    <button class="municipio-btn active" data-municipio="all">Todos</button>
+                    <button class="municipio-btn" data-municipio="chia">Chía</button>
+                    <button class="municipio-btn" data-municipio="tabio">Tabio</button>
+                    <button class="municipio-btn" data-municipio="cajica">Cajicá</button>
+                </div>
+            </div>
+
+            <!-- Carrusel de Artesanías (inicialmente oculto) -->
+            <div id="artesania-carousel" class="category-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-content">
+                        <div class="carousel-info">
+                            <div class="experience-info">
+                                <div class="experience-header">
+                                    <h3 class="experience-name">Taller de Artesanías Locales</h3>
+                                    <div class="experience-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.6</span>
+                                    </div>
+                                </div>
+                                <p class="experience-description">Aprende técnicas tradicionales de artesanía con maestros locales y crea tu propia pieza única. Descubre el arte del tejido, cerámica y otras técnicas ancestrales transmitidas de generación en generación.</p>
+                                <div class="experience-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Chía</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>2-4 horas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-user-friends"></i>
+                                        <span>1-8 personas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-hands"></i>
+                                        <span>Taller práctico</span>
+                                    </div>
+                                </div>
+                                <!-- BOTÓN AÑADIDO AQUÍ -->
+                                <button class="btn-encontrar" data-experience="Taller de Artesanías Locales">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Dónde encontrar este taller
+                                </button>
+                                <div class="experience-actions">
+                                    <button class="btn btn-secondary" onclick="guardarExperiencia(9)">
+                                        <i class="far fa-heart"></i>
+                                        Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-image">
+                            <div class="main-image">
+                                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Taller de Artesanías">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-thumbnails">
+                        <div class="thumbnail active" data-slide="0">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Taller de Artesanías">
+                            </div>
+                            <span class="thumbnail-name">Taller</span>
+                        </div>
+                        <div class="thumbnail" data-slide="1">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1605722243973-fe04b84b2e2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tejidos Tradicionales">
+                            </div>
+                            <span class="thumbnail-name">Tejidos</span>
+                        </div>
+                        <div class="thumbnail" data-slide="2">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Cerámica Artesanal">
+                            </div>
+                            <span class="thumbnail-name">Cerámica</span>
+                        </div>
+                        <div class="thumbnail" data-slide="3">
+                            <div class="thumbnail-image">
+                                <img src="https://images.unsplash.com/photo-1594736797933-d0ea3ff8db41?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Cestería">
+                            </div>
+                            <span class="thumbnail-name">Cestería</span>
                         </div>
                     </div>
                 </div>
@@ -565,7 +1135,7 @@
             </div>
             <div class="municipios-grid">
                 <div class="municipio-card">
-                    <div class="municipio-image" style="background-image: url('https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                    <div class="municipio-image" style="background-image: url('https://cdn.colombia.com/sdi/2024/08/29/que-hacer-en-el-municipio-de-chia-1252850.jpg')">
                         <div class="municipio-overlay">
                             <h3>Chía</h3>
                             <p>Capital de la Luna</p>
@@ -592,7 +1162,7 @@
                 </div>
                 
                 <div class="municipio-card">
-                    <div class="municipio-image" style="background-image: url('https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                    <div class="municipio-image" style="background-image: url('https://i.ytimg.com/vi/SP58GOoB66o/maxresdefault.jpg')">
                         <div class="municipio-overlay">
                             <h3>Tabio</h3>
                             <p>Aguas Termales</p>
@@ -619,7 +1189,7 @@
                 </div>
                 
                 <div class="municipio-card">
-                    <div class="municipio-image" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+                    <div class="municipio-image" style="background-image: url('https://www.turismocajica.gov.co/wp-content/uploads/2023/09/Parque-Principal-Fotos-Cajica-2023-6-scaled.webp')">
                         <div class="municipio-overlay">
                             <h3>Cajicá</h3>
                             <p>Patrimonio Colonial</p>
@@ -1012,7 +1582,7 @@
     <div class="modal" id="locationsModal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h3 class="modal-title" id="modalDishTitle">Lugares para probar [Plato]</h3>
+            <h3 class="modal-title" id="modalDishTitle">Lugares para [Experiencia]</h3>
             <ul class="location-list" id="locationList">
                 <!-- Los lugares se cargarán dinámicamente aquí -->
             </ul>
@@ -1204,9 +1774,294 @@
             }
         ];
 
-        // Datos de lugares para cada plato en todos los municipios
+        // Datos para Ecoturismo
+        const ecoturismoData = [
+            // Ecoturismo en Tabio
+            {
+                id: 17,
+                name: "Termales de Tabio",
+                description: "Disfruta de las aguas termales naturales de Tabio, reconocidas por sus propiedades terapéuticas y relajantes. Un espacio perfecto para conectar con la naturaleza y revitalizar cuerpo y mente.",
+                image: "https://www.colombiaturismo.com.co/img/termales-el-zipa.jpg",
+                location: "Tabio",
+                duration: "3-4 horas",
+                groupSize: "1-6 personas",
+                rating: "4.9",
+                municipio: "tabio",
+                features: ["Aguas a 37-42°C", "Propiedades terapéuticas", "Ambiente natural"]
+            },
+            {
+                id: 18,
+                name: "Jardín Botánico de Tabio",
+                description: "Explora el hermoso Jardín Botánico de Tabio, hogar de una gran diversidad de flora nativa. Un espacio educativo y recreativo perfecto para aprender sobre la biodiversidad local.",
+                image: "https://d2yoo3qu6vrk5d.cloudfront.net/pulzo-lite/images-resized/PP4407220-h-o.jpg",
+                location: "Tabio",
+                duration: "2-3 horas",
+                groupSize: "1-8 personas",
+                rating: "4.7",
+                municipio: "tabio",
+                features: ["Flora nativa", "Espacio educativo", "Senderos interpretativos"]
+            },
+            {
+                id: 19,
+                name: "Senderos Ecológicos Las Capillas",
+                description: "Recorrido por los impresionantes senderos ecológicos de Las Capillas, con paisajes montañosos, cascadas y una rica biodiversidad. Ideal para amantes del senderismo y la fotografía.",
+                image: "https://media-cdn.tripadvisor.com/media/photo-s/08/bd/f5/23/hospedaje-la-casona.jpg",
+                location: "Tabio",
+                duration: "4-5 horas",
+                groupSize: "2-10 personas",
+                rating: "4.8",
+                municipio: "tabio",
+                features: ["Cascadas naturales", "Biodiversidad", "Vistas panorámicas"]
+            },
+            {
+                id: 20,
+                name: "Cascadas Naturales",
+                description: "Descubre las impresionantes cascadas naturales escondidas en las montañas de Tabio. Un espectáculo de la naturaleza que combina el sonido del agua con paisajes exuberantes.",
+                image: "https://s1.wklcdn.com/image_202/6086921/47891917/32127394.700x525.jpg",
+                location: "Tabio",
+                duration: "3-4 horas",
+                groupSize: "2-8 personas",
+                rating: "4.6",
+                municipio: "tabio",
+                features: ["Aguas cristalinas", "Naturaleza virgen", "Fotografía paisajística"]
+            },
+            // Ecoturismo en Chía
+            {
+                id: 21,
+                name: "Reserva Natural Chía",
+                description: "Explora la reserva natural de Chía, un santuario de biodiversidad con senderos ecológicos, observación de aves y paisajes únicos de la sabana bogotana.",
+                image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Chía",
+                duration: "3-4 horas",
+                groupSize: "2-12 personas",
+                rating: "4.7",
+                municipio: "chia",
+                features: ["Observación de aves", "Senderos ecológicos", "Flora nativa"]
+            },
+            {
+                id: 22,
+                name: "Parque la montaña del oso",
+                description: "Disfruta de un día en el parque la montaña del oso, con áreas de picnic, senderos naturales y espacios para actividades al aire libre en contacto con la naturaleza.",
+                image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/5b/14/6b/photo2jpg.jpg?w=900&h=500&s=1",
+                location: "Chía",
+                duration: "2-5 horas",
+                groupSize: "1-15 personas",
+                rating: "4.5",
+                municipio: "chia",
+                features: ["Áreas de picnic", "Senderos naturales", "Actividades familiares"]
+            },
+            // Ecoturismo en Cajicá
+            {
+                id: 23,
+                name: "Ruta Ecoturística Cajicá",
+                description: "Recorrido por los principales atractivos naturales de Cajicá, incluyendo miradores naturales, quebradas y paisajes rurales que muestran la belleza de la región.",
+                image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Cajicá",
+                duration: "3-4 horas",
+                groupSize: "2-8 personas",
+                rating: "4.6",
+                municipio: "cajica",
+                features: ["Miradores naturales", "Paisajes rurales", "Quebradas cristalinas"]
+            },
+            {
+                id: 24,
+                name: "Avistamiento de Aves Cajicá",
+                description: "Experiencia guiada de avistamiento de aves en los entornos naturales de Cajicá, ideal para ornitólogos aficionados y amantes de la naturaleza.",
+                image: "https://images.unsplash.com/photo-1551085254-e96b210db58a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80",
+                location: "Cajicá",
+                duration: "2-3 horas",
+                groupSize: "2-6 personas",
+                rating: "4.8",
+                municipio: "cajica",
+                features: ["Guías especializados", "Diversidad de aves", "Equipos de observación"]
+            }
+        ];
+
+        // Datos para Cultura
+        const culturaData = [
+            // Cultura en Cajicá
+            {
+                id: 25,
+                name: "Tour Cultural Cajicá",
+                description: "Recorrido histórico por el patrimonio colonial y tradiciones locales en el corazón de Cajicá. Descubre la arquitectura colonial, iglesias centenarias y la rica historia de este municipio.",
+                image: "https://images.unsplash.com/photo-1515586838455-8f8f940d6853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Cajicá",
+                duration: "2-3 horas",
+                groupSize: "2-10 personas",
+                rating: "4.7",
+                municipio: "cajica",
+                features: ["Arquitectura colonial", "Iglesias centenarias", "Historia local"]
+            },
+            {
+                id: 26,
+                name: "Museos Locales",
+                description: "Visita los museos locales que preservan la historia y cultura de la región, con exhibiciones de artefactos históricos, fotografías antiguas y muestras de arte local.",
+                image: "https://images.unsplash.com/photo-1583425423320-2386622cdadf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Cajicá",
+                duration: "1-2 horas",
+                groupSize: "1-8 personas",
+                rating: "4.5",
+                municipio: "cajica",
+                features: ["Artefactos históricos", "Fotografías antiguas", "Arte local"]
+            },
+            {
+                id: 27,
+                name: "Festivales Tradicionales",
+                description: "Participa en los festivales tradicionales que celebran la cultura local, con música en vivo, danzas folclóricas, gastronomía típica y actividades culturales para toda la familia.",
+                image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Cajicá",
+                duration: "3-6 horas",
+                groupSize: "1-20 personas",
+                rating: "4.8",
+                municipio: "cajica",
+                features: ["Música en vivo", "Danzas folclóricas", "Gastronomía típica"]
+            },
+            {
+                id: 28,
+                name: "Arquitectura Colonial",
+                description: "Recorrido guiado por los edificios y estructuras de arquitectura colonial que caracterizan a Cajicá, aprendiendo sobre su historia y significado cultural.",
+                image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Cajicá",
+                duration: "1.5-2 horas",
+                groupSize: "2-12 personas",
+                rating: "4.6",
+                municipio: "cajica",
+                features: ["Edificios históricos", "Guías especializados", "Significado cultural"]
+            },
+            // Cultura en Chía
+            {
+                id: 29,
+                name: "Centro Cultural Chía",
+                description: "Visita el centro cultural de Chía, un espacio dedicado a la promoción de las artes y la cultura local con exposiciones, talleres y eventos culturales.",
+                image: "https://images.unsplash.com/photo-1561484936-3f79fc9c8ef0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Chía",
+                duration: "1-3 horas",
+                groupSize: "1-10 personas",
+                rating: "4.7",
+                municipio: "chia",
+                features: ["Exposiciones artísticas", "Talleres culturales", "Eventos especiales"]
+            },
+            {
+                id: 30,
+                name: "Tradiciones Lunares",
+                description: "Conoce las tradiciones y leyendas asociadas con la luna en Chía, conocida como la 'Capital de la Luna', a través de recorridos y narraciones culturales.",
+                image: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Chía",
+                duration: "1-2 horas",
+                groupSize: "2-8 personas",
+                rating: "4.5",
+                municipio: "chia",
+                features: ["Leyendas locales", "Narraciones culturales", "Tradiciones únicas"]
+            },
+            // Cultura en Tabio
+            {
+                id: 31,
+                name: "Patrimonio Cultural Tabio",
+                description: "Explora el patrimonio cultural de Tabio, incluyendo sitios históricos, tradiciones ancestrales y expresiones artísticas que definen la identidad del municipio.",
+                image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Tabio",
+                duration: "2-3 horas",
+                groupSize: "2-10 personas",
+                rating: "4.6",
+                municipio: "tabio",
+                features: ["Sitios históricos", "Tradiciones ancestrales", "Expresiones artísticas"]
+            }
+        ];
+
+        // Datos para Artesanías
+        const artesaniaData = [
+            // Artesanías en Chía
+            {
+                id: 32,
+                name: "Taller de Artesanías Locales",
+                description: "Aprende técnicas tradicionales de artesanía con maestros locales y crea tu propia pieza única. Descubre el arte del tejido, cerámica y otras técnicas ancestrales transmitidas de generación en generación.",
+                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80",
+                location: "Chía",
+                duration: "2-4 horas",
+                groupSize: "1-8 personas",
+                rating: "4.6",
+                municipio: "chia",
+                features: ["Técnicas tradicionales", "Materiales locales", "Pieza personalizada"]
+            },
+            {
+                id: 33,
+                name: "Tejidos Tradicionales",
+                description: "Taller especializado en tejidos tradicionales donde aprenderás técnicas ancestrales de tejido y crearás piezas únicas con materiales naturales de la región.",
+                image: "https://images.unsplash.com/photo-1605722243973-fe04b84b2e2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Chía",
+                duration: "3-4 horas",
+                groupSize: "1-6 personas",
+                rating: "4.7",
+                municipio: "chia",
+                features: ["Técnicas ancestrales", "Materiales naturales", "Piezas únicas"]
+            },
+            {
+                id: 34,
+                name: "Cerámica Artesanal",
+                description: "Descubre el arte de la cerámica artesanal en este taller práctico donde moldearás y decorarás tus propias piezas bajo la guía de maestros alfareros locales.",
+                image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Chía",
+                duration: "2-3 horas",
+                groupSize: "1-8 personas",
+                rating: "4.8",
+                municipio: "chia",
+                features: ["Técnicas de moldeado", "Decoración manual", "Guía de expertos"]
+            },
+            {
+                id: 35,
+                name: "Cestería Tradicional",
+                description: "Aprende el arte de la cestería tradicional utilizando fibras naturales de la región para crear canastos y piezas utilitarias con técnicas transmitidas por generaciones.",
+                image: "https://images.unsplash.com/photo-1594736797933-d0ea3ff8db41?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Chía",
+                duration: "2-3 horas",
+                groupSize: "1-6 personas",
+                rating: "4.5",
+                municipio: "chia",
+                features: ["Fibras naturales", "Técnicas ancestrales", "Piezas utilitarias"]
+            },
+            // Artesanías en Tabio
+            {
+                id: 36,
+                name: "Artesanías en Madera",
+                description: "Taller especializado en artesanías de madera donde aprenderás a tallar y pulir piezas únicas utilizando maderas locales y técnicas tradicionales.",
+                image: "https://images.unsplash.com/photo-1581093458791-9d63fbfd83a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Tabio",
+                duration: "3-4 horas",
+                groupSize: "1-6 personas",
+                rating: "4.7",
+                municipio: "tabio",
+                features: ["Maderas locales", "Técnicas de tallado", "Pulido artesanal"]
+            },
+            {
+                id: 37,
+                name: "Joyería Artesanal",
+                description: "Crea joyería única utilizando materiales naturales y técnicas artesanales en este taller guiado por joyeros locales con años de experiencia.",
+                image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Tabio",
+                duration: "2-3 horas",
+                groupSize: "1-8 personas",
+                rating: "4.6",
+                municipio: "tabio",
+                features: ["Materiales naturales", "Técnicas artesanales", "Diseños únicos"]
+            },
+            // Artesanías en Cajicá
+            {
+                id: 38,
+                name: "Textiles Artesanales",
+                description: "Taller de textiles artesanales donde aprenderás técnicas de teñido natural y tejido para crear piezas textiles únicas con identidad local.",
+                image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                location: "Cajicá",
+                duration: "3-4 horas",
+                groupSize: "1-6 personas",
+                rating: "4.7",
+                municipio: "cajica",
+                features: ["Teñido natural", "Técnicas de tejido", "Identidad local"]
+            }
+        ];
+
+        // Datos de lugares para cada experiencia en todos los municipios
         const locationsData = {
-            // Lugares en Tabio
+            // Lugares en Tabio para Gastronomía
             "Mute Santafereño": [
                 { name: "Restaurante La Casona", address: "Carrera 5 #10-25, Centro, Tabio" },
                 { name: "Fonda Doña Rosa", address: "Calle 8 #5-30, Barrio El Centro, Tabio" },
@@ -1236,7 +2091,7 @@
                 { name: "Panadería San Isidro", address: "Calle 8 #5-12, Tabio" },
                 { name: "Fonda La Mañanera", address: "Carrera 3 #7-18, Tabio" }
             ],
-            // Lugares en Cajicá
+            // Lugares en Cajicá para Gastronomía
             "Lechona Cajiqueña": [
                 { name: "Restaurante La Casona Colonial", address: "Carrera 4 #8-15, Centro, Cajicá" },
                 { name: "Asadero El Rincón Cajiqueño", address: "Calle 10 #5-20, Cajicá" },
@@ -1262,7 +2117,7 @@
                 { name: "Cafetería El Rincón", address: "Calle 6 #5-12, Cajicá" },
                 { name: "Pastelería Doña Rosa", address: "Carrera 7 #8-25, Cajicá" }
             ],
-            // Lugares en Chía
+            // Lugares en Chía para Gastronomía
             "Ajiaco Chiano": [
                 { name: "Restaurante La Luna", address: "Carrera 15 #20-35, Centro, Chía" },
                 { name: "Fonda Doña María", address: "Calle 18 #12-25, Chía" },
@@ -1287,6 +2142,103 @@
                 { name: "Desayunadero El Amanecer", address: "Carrera 13 #17-30, Centro, Chía" },
                 { name: "Cafetería La Mañana", address: "Calle 19 #14-22, Chía" },
                 { name: "Fonda Doña Carmen", address: "Carrera 9 #11-18, Chía" }
+            ],
+
+            // Lugares para Ecoturismo
+            "Termales de Tabio": [
+                { name: "Termales El Descanso", address: "Vía Principal Km 5, Tabio" },
+                { name: "Balneario Aguas Calientes", address: "Carrera 8 #15-40, Tabio" },
+                { name: "Centro Termal La Fontana", address: "Vereda El Rosal, Tabio" }
+            ],
+            "Jardín Botánico de Tabio": [
+                { name: "Jardín Botánico Municipal", address: "Carrera 10 #20-35, Tabio" },
+                { name: "Vivero La Esperanza", address: "Calle 15 #8-25, Tabio" }
+            ],
+            "Senderos Ecológicos Las Capillas": [
+                { name: "Punto de Partida Sendero", address: "Vereda Las Capillas, Tabio" },
+                { name: "Centro de Visitantes", address: "Carrera 12 #18-30, Tabio" }
+            ],
+            "Cascadas Naturales": [
+                { name: "Cascada El Salto", address: "Vereda El Salto, Tabio" },
+                { name: "Mirador Cascadas", address: "Camino Rural Km 3, Tabio" }
+            ],
+            "Reserva Natural Chía": [
+                { name: "Centro de Visitantes Reserva", address: "Carrera 15 #25-40, Chía" },
+                { name: "Oficina de Turismo Chía", address: "Carrera 12 #18-35, Chía" }
+            ],
+            "Parque Ecológico Chía": [
+                { name: "Entrada Principal Parque", address: "Carrera 18 #22-30, Chía" },
+                { name: "Oficina Administrativa", address: "Calle 20 #15-25, Chía" }
+            ],
+            "Ruta Ecoturística Cajicá": [
+                { name: "Punto de Encuentro Turístico", address: "Carrera 4 #8-20, Centro, Cajicá" },
+                { name: "Oficina de Turismo Cajicá", address: "Calle 10 #5-18, Cajicá" }
+            ],
+            "Avistamiento de Aves Cajicá": [
+                { name: "Centro de Observación", address: "Vereda El Salitre, Cajicá" },
+                { name: "Guías Especializados", address: "Carrera 5 #9-15, Centro, Cajicá" }
+            ],
+
+            // Lugares para Cultura
+            "Tour Cultural Cajicá": [
+                { name: "Oficina de Turismo Municipal", address: "Carrera 4 #8-15, Centro, Cajicá" },
+                { name: "Casa de la Cultura", address: "Calle 10 #5-20, Cajicá" },
+                { name: "Punto de Encuentro Plaza Principal", address: "Plaza Principal, Cajicá" }
+            ],
+            "Museos Locales": [
+                { name: "Museo Histórico de Cajicá", address: "Carrera 5 #9-12, Centro, Cajicá" },
+                { name: "Casa Museo Colonial", address: "Calle 7 #4-18, Cajicá" }
+            ],
+            "Festivales Tradicionales": [
+                { name: "Plaza de Ferias Municipal", address: "Carrera 6 #10-25, Centro, Cajicá" },
+                { name: "Parque Principal", address: "Carrera 3 #6-22, Cajicá" }
+            ],
+            "Arquitectura Colonial": [
+                { name: "Iglesia Principal", address: "Carrera 4 #8-20, Centro, Cajicá" },
+                { name: "Casona Histórica", address: "Calle 8 #6-18, Cajicá" }
+            ],
+            "Centro Cultural Chía": [
+                { name: "Centro Cultural Municipal", address: "Carrera 15 #20-35, Centro, Chía" },
+                { name: "Casa de la Cultura Chía", address: "Calle 18 #12-25, Chía" }
+            ],
+            "Tradiciones Lunares": [
+                { name: "Punto de Información Turística", address: "Carrera 12 #18-30, Centro, Chía" },
+                { name: "Oficina de Turismo Chía", address: "Carrera 10 #14-28, Chía" }
+            ],
+            "Patrimonio Cultural Tabio": [
+                { name: "Oficina de Turismo Tabio", address: "Carrera 5 #10-25, Centro, Tabio" },
+                { name: "Casa de la Cultura Tabio", address: "Calle 8 #5-30, Tabio" }
+            ],
+
+            // Lugares para Artesanías
+            "Taller de Artesanías Locales": [
+                { name: "Taller Artesanal Doña Rosa", address: "Carrera 15 #20-35, Centro, Chía" },
+                { name: "Centro de Artesanías Luna", address: "Calle 18 #12-25, Chía" },
+                { name: "Taller Comunitario", address: "Carrera 12 #18-30, Centro, Chía" }
+            ],
+            "Tejidos Tradicionales": [
+                { name: "Taller de Tejidos La Tradición", address: "Carrera 14 #16-32, Centro, Chía" },
+                { name: "Artesanías en Lana", address: "Calle 20 #15-22, Chía" }
+            ],
+            "Cerámica Artesanal": [
+                { name: "Alfarería El Barro", address: "Carrera 16 #19-34, Centro, Chía" },
+                { name: "Taller de Cerámica", address: "Calle 22 #18-26, Chía" }
+            ],
+            "Cestería Tradicional": [
+                { name: "Taller de Cestería Natural", address: "Carrera 13 #17-30, Centro, Chía" },
+                { name: "Artesanías en Fibras", address: "Calle 19 #14-22, Chía" }
+            ],
+            "Artesanías en Madera": [
+                { name: "Taller de Madera El Roble", address: "Carrera 6 #9-12, Centro, Tabio" },
+                { name: "Artesanías en Madera Tabio", address: "Calle 7 #5-18, Tabio" }
+            ],
+            "Joyería Artesanal": [
+                { name: "Taller de Joyería La Mina", address: "Carrera 4 #7-22, Centro, Tabio" },
+                { name: "Artesanías en Plata", address: "Calle 9 #6-14, Tabio" }
+            ],
+            "Textiles Artesanales": [
+                { name: "Taller de Textiles Tradicionales", address: "Carrera 5 #8-10, Centro, Cajicá" },
+                { name: "Tejeduría Artesanal", address: "Calle 6 #4-25, Cajicá" }
             ]
         };
 
@@ -1306,18 +2258,29 @@
                 });
             }
             
-            // Funcionalidad para filtros y carrusel de gastronomía
+            // Funcionalidad para filtros y carruseles
             const filterButtons = document.querySelectorAll('.filter-btn');
             const experienciaCards = document.querySelectorAll('.experiencia-card');
             const gastronomiaCarousel = document.getElementById('gastronomia-carousel');
+            const ecoturismoCarousel = document.getElementById('ecoturismo-carousel');
+            const culturaCarousel = document.getElementById('cultura-carousel');
+            const artesaniaCarousel = document.getElementById('artesania-carousel');
             const experienciasGrid = document.getElementById('experiencias-grid');
-            const municipioSelector = document.getElementById('municipio-selector');
-            const municipioButtons = document.querySelectorAll('.municipio-btn');
+            
+            // Selectores de municipio
+            const gastronomiaMunicipioSelector = document.getElementById('gastronomia-municipio-selector');
+            const ecoturismoMunicipioSelector = document.getElementById('ecoturismo-municipio-selector');
+            const culturaMunicipioSelector = document.getElementById('cultura-municipio-selector');
+            const artesaniaMunicipioSelector = document.getElementById('artesania-municipio-selector');
+            
             let carouselInterval;
 
-            // Inicialmente ocultar el carrusel y selector de municipio
-            gastronomiaCarousel.style.display = 'none';
-            municipioSelector.style.display = 'none';
+            // Inicialmente ocultar todos los carruseles y selectores de municipio
+            hideAllCarousels();
+            hideAllMunicipioSelectors();
+            
+            // Mostrar el grid de experiencias por defecto
+            experienciasGrid.style.display = 'grid';
 
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -1328,18 +2291,32 @@
 
                     const filter = button.getAttribute('data-filter');
 
-                    // Si se selecciona gastronomía, mostrar carrusel y selector, ocultar grid
+                    // Ocultar todos los carruseles y selectores primero
+                    hideAllCarousels();
+                    hideAllMunicipioSelectors();
+                    experienciasGrid.style.display = 'none';
+                    stopCarousel(); // Detener cualquier carrusel en ejecución
+
+                    // Mostrar el carrusel y selector correspondiente según el filtro
                     if (filter === 'gastronomia') {
                         gastronomiaCarousel.style.display = 'block';
-                        municipioSelector.style.display = 'block';
-                        experienciasGrid.style.display = 'none';
-                        startCarousel(); // Iniciar el carrusel automático
-                        updateCarouselByMunicipio('all'); // Mostrar todas las experiencias inicialmente
+                        gastronomiaMunicipioSelector.style.display = 'block';
+                        startCarousel('gastronomia', 'all');
+                    } else if (filter === 'ecoturismo') {
+                        ecoturismoCarousel.style.display = 'block';
+                        ecoturismoMunicipioSelector.style.display = 'block';
+                        startCarousel('ecoturismo', 'all');
+                    } else if (filter === 'cultura') {
+                        culturaCarousel.style.display = 'block';
+                        culturaMunicipioSelector.style.display = 'block';
+                        startCarousel('cultura', 'all');
+                    } else if (filter === 'artesania') {
+                        artesaniaCarousel.style.display = 'block';
+                        artesaniaMunicipioSelector.style.display = 'block';
+                        startCarousel('artesania', 'all');
                     } else {
-                        gastronomiaCarousel.style.display = 'none';
-                        municipioSelector.style.display = 'none';
+                        // Mostrar todas las experiencias en grid
                         experienciasGrid.style.display = 'grid';
-                        stopCarousel(); // Detener el carrusel automático
                     }
 
                     // Filtrar las tarjetas de experiencias
@@ -1353,123 +2330,185 @@
                 });
             });
 
-            // Funcionalidad para filtrado por municipio
-            municipioButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remover clase active de todos los botones
-                    municipioButtons.forEach(btn => btn.classList.remove('active'));
-                    // Añadir clase active al botón clickeado
-                    button.classList.add('active');
+            // Funciones auxiliares
+            function hideAllCarousels() {
+                gastronomiaCarousel.style.display = 'none';
+                ecoturismoCarousel.style.display = 'none';
+                culturaCarousel.style.display = 'none';
+                artesaniaCarousel.style.display = 'none';
+            }
 
-                    const municipio = button.getAttribute('data-municipio');
-                    updateCarouselByMunicipio(municipio);
-                    startCarousel(); // Reiniciar el carrusel automático
+            function hideAllMunicipioSelectors() {
+                gastronomiaMunicipioSelector.style.display = 'none';
+                ecoturismoMunicipioSelector.style.display = 'none';
+                culturaMunicipioSelector.style.display = 'none';
+                artesaniaMunicipioSelector.style.display = 'none';
+            }
+
+            // Funcionalidad para los selectores de municipio en cada categoría
+            setupMunicipioSelector('gastronomia', gastronomiaData);
+            setupMunicipioSelector('ecoturismo', ecoturismoData);
+            setupMunicipioSelector('cultura', culturaData);
+            setupMunicipioSelector('artesania', artesaniaData);
+
+            function setupMunicipioSelector(category, data) {
+                const selector = document.getElementById(`${category}-municipio-selector`);
+                const buttons = selector.querySelectorAll('.municipio-btn');
+                
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Remover clase active de todos los botones
+                        buttons.forEach(btn => btn.classList.remove('active'));
+                        // Añadir clase active al botón clickeado
+                        button.classList.add('active');
+
+                        const municipio = button.getAttribute('data-municipio');
+                        updateCarouselByMunicipio(category, municipio, data);
+                        startCarousel(category, municipio);
+                    });
                 });
-            });
+            }
 
-            // Funcionalidad del carrusel
-            const prevButton = document.querySelector('.carousel-prev');
-            const nextButton = document.querySelector('.carousel-next');
-            let currentSlide = 0;
-            let filteredData = [...gastronomiaData];
-
-            function updateCarouselByMunicipio(municipio) {
+            function updateCarouselByMunicipio(category, municipio, data) {
+                let filteredData;
                 if (municipio === 'all') {
-                    filteredData = [...gastronomiaData];
+                    filteredData = [...data];
                 } else {
-                    filteredData = gastronomiaData.filter(item => item.municipio === municipio);
+                    filteredData = data.filter(item => item.municipio === municipio);
                 }
+                
+                const carousel = document.getElementById(`${category}-carousel`);
+                const infoContainer = carousel.querySelector('.carousel-info');
+                const imageContainer = carousel.querySelector('.main-image img');
+                const thumbnailsContainer = carousel.querySelector('.carousel-thumbnails');
                 
                 // Si no hay datos, mostrar mensaje
                 if (filteredData.length === 0) {
-                    document.querySelector('.carousel-info').innerHTML = `
+                    infoContainer.innerHTML = `
                         <div class="no-data">
-                            <i class="fas fa-utensils"></i>
+                            <i class="fas fa-${getCategoryIcon(category)}"></i>
                             <h3>Próximamente</h3>
-                            <p>Estamos trabajando en nuevas experiencias gastronómicas para este municipio.</p>
+                            <p>Estamos trabajando en nuevas experiencias de ${getCategoryName(category)} para este municipio.</p>
                         </div>
                     `;
-                    document.querySelector('.main-image img').src = 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
-                    document.querySelector('.carousel-thumbnails').style.display = 'none';
+                    imageContainer.src = getDefaultImage(category);
+                    thumbnailsContainer.style.display = 'none';
                     return;
                 }
                 
-                document.querySelector('.carousel-thumbnails').style.display = 'flex';
+                thumbnailsContainer.style.display = 'flex';
                 
-                // Actualizar el slide actual si es necesario
-                if (currentSlide >= filteredData.length) {
-                    currentSlide = 0;
-                }
-                
-                updateCarouselSlide(currentSlide);
-                updateThumbnails();
+                // Actualizar el slide actual
+                updateCarouselSlide(category, 0, filteredData);
+                updateThumbnails(category, filteredData);
             }
 
-            function updateCarouselSlide(slideIndex) {
-                const dish = filteredData[slideIndex];
-                if (!dish) return;
+            function getCategoryIcon(category) {
+                const icons = {
+                    'gastronomia': 'utensils',
+                    'ecoturismo': 'leaf',
+                    'cultura': 'landmark',
+                    'artesania': 'hands'
+                };
+                return icons[category] || 'compass';
+            }
+
+            function getCategoryName(category) {
+                const names = {
+                    'gastronomia': 'gastronomía',
+                    'ecoturismo': 'ecoturismo',
+                    'cultura': 'cultura',
+                    'artesania': 'artesanías'
+                };
+                return names[category] || 'experiencias';
+            }
+
+            function getDefaultImage(category) {
+                const images = {
+                    'gastronomia': 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                    'ecoturismo': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                    'cultura': 'https://images.unsplash.com/photo-1515586838455-8f8f940d6853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                    'artesania': 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80'
+                };
+                return images[category] || 'https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+            }
+
+            function updateCarouselSlide(category, slideIndex, data) {
+                const experience = data[slideIndex];
+                if (!experience) return;
                 
-                document.querySelector('.dish-name').textContent = dish.name;
-                document.querySelector('.dish-description').textContent = dish.description;
-                document.querySelector('.main-image img').src = dish.image;
-                document.querySelector('.dish-rating span').textContent = dish.rating;
+                const carousel = document.getElementById(`${category}-carousel`);
+                const nameElement = carousel.querySelector('.experience-name');
+                const descriptionElement = carousel.querySelector('.experience-description');
+                const imageElement = carousel.querySelector('.main-image img');
+                const ratingElement = carousel.querySelector('.experience-rating span');
+                const detailsContainer = carousel.querySelector('.experience-details');
                 
-                const details = document.querySelector('.dish-details');
-                details.innerHTML = `
+                nameElement.textContent = experience.name;
+                descriptionElement.textContent = experience.description;
+                imageElement.src = experience.image;
+                ratingElement.textContent = experience.rating;
+                
+                // Actualizar detalles
+                detailsContainer.innerHTML = `
                     <div class="detail-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>${dish.location}</span>
+                        <span>${experience.location}</span>
                     </div>
                     <div class="detail-item">
                         <i class="fas fa-clock"></i>
-                        <span>${dish.duration}</span>
+                        <span>${experience.duration}</span>
                     </div>
                     <div class="detail-item">
                         <i class="fas fa-user-friends"></i>
-                        <span>${dish.groupSize}</span>
+                        <span>${experience.groupSize}</span>
                     </div>
+                    ${experience.features ? experience.features.map(feature => `
+                        <div class="detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>${feature}</span>
+                        </div>
+                    `).join('') : ''}
                 `;
                 
                 // Actualizar evento del botón guardar
-                const saveBtn = document.querySelector('.btn-secondary');
-                saveBtn.onclick = () => guardarExperiencia(dish.id);
-                
-                // Actualizar el botón de lugares
-                const lugaresBtn = document.querySelector('.btn-lugares');
-                lugaresBtn.setAttribute('data-dish', dish.name);
+                const saveBtn = carousel.querySelector('.btn-secondary');
+                saveBtn.onclick = () => guardarExperiencia(experience.id);
             }
 
-            function updateThumbnails() {
-                const thumbnailsContainer = document.querySelector('.carousel-thumbnails');
+            function updateThumbnails(category, data) {
+                const carousel = document.getElementById(`${category}-carousel`);
+                const thumbnailsContainer = carousel.querySelector('.carousel-thumbnails');
                 thumbnailsContainer.innerHTML = '';
                 
-                filteredData.forEach((dish, index) => {
+                data.forEach((experience, index) => {
                     const thumbnail = document.createElement('div');
-                    thumbnail.className = `thumbnail ${index === currentSlide ? 'active' : ''}`;
+                    thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
                     thumbnail.setAttribute('data-slide', index);
                     
                     thumbnail.innerHTML = `
                         <div class="thumbnail-image">
-                            <img src="${dish.image}" alt="${dish.name}">
+                            <img src="${experience.image}" alt="${experience.name}">
                         </div>
-                        <span class="thumbnail-name">${dish.name.split(' ')[0]}</span>
+                        <span class="thumbnail-name">${experience.name.split(' ')[0]}</span>
                     `;
                     
                     thumbnail.addEventListener('click', () => {
-                        goToSlide(index);
+                        goToSlide(category, index, data);
                     });
                     
                     thumbnailsContainer.appendChild(thumbnail);
                 });
             }
 
-            function goToSlide(slideIndex) {
-                currentSlide = slideIndex;
-                updateCarouselSlide(currentSlide);
+            function goToSlide(category, slideIndex, data) {
+                updateCarouselSlide(category, slideIndex, data);
                 
                 // Actualizar thumbnails
-                document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
-                    if (index === currentSlide) {
+                const carousel = document.getElementById(`${category}-carousel`);
+                const thumbnails = carousel.querySelectorAll('.thumbnail');
+                thumbnails.forEach((thumb, index) => {
+                    if (index === slideIndex) {
                         thumb.classList.add('active');
                     } else {
                         thumb.classList.remove('active');
@@ -1477,20 +2516,58 @@
                 });
             }
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % filteredData.length;
-                goToSlide(currentSlide);
+            // Variables para controlar el estado de cada carrusel
+            const carouselStates = {
+                gastronomia: { currentSlide: 0, data: [], municipio: 'all' },
+                ecoturismo: { currentSlide: 0, data: [], municipio: 'all' },
+                cultura: { currentSlide: 0, data: [], municipio: 'all' },
+                artesania: { currentSlide: 0, data: [], municipio: 'all' }
+            };
+
+            function nextSlide(category) {
+                const state = carouselStates[category];
+                if (!state.data || state.data.length === 0) return;
+                
+                state.currentSlide = (state.currentSlide + 1) % state.data.length;
+                goToSlide(category, state.currentSlide, state.data);
             }
 
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + filteredData.length) % filteredData.length;
-                goToSlide(currentSlide);
+            function prevSlide(category) {
+                const state = carouselStates[category];
+                if (!state.data || state.data.length === 0) return;
+                
+                state.currentSlide = (state.currentSlide - 1 + state.data.length) % state.data.length;
+                goToSlide(category, state.currentSlide, state.data);
             }
 
-            function startCarousel() {
+            function startCarousel(category, municipio) {
                 stopCarousel();
-                if (filteredData.length > 1) {
-                    carouselInterval = setInterval(nextSlide, 10000); // Cambiar cada 10 segundos
+                
+                // Obtener datos filtrados por municipio
+                let data;
+                if (category === 'gastronomia') {
+                    data = municipio === 'all' ? gastronomiaData : gastronomiaData.filter(item => item.municipio === municipio);
+                } else if (category === 'ecoturismo') {
+                    data = municipio === 'all' ? ecoturismoData : ecoturismoData.filter(item => item.municipio === municipio);
+                } else if (category === 'cultura') {
+                    data = municipio === 'all' ? culturaData : culturaData.filter(item => item.municipio === municipio);
+                } else if (category === 'artesania') {
+                    data = municipio === 'all' ? artesaniaData : artesaniaData.filter(item => item.municipio === municipio);
+                }
+                
+                // Actualizar estado del carrusel
+                carouselStates[category].data = data;
+                carouselStates[category].municipio = municipio;
+                carouselStates[category].currentSlide = 0;
+                
+                // Actualizar la vista
+                updateCarouselByMunicipio(category, municipio, data);
+                
+                // Iniciar el carrusel automático si hay más de un elemento
+                if (data.length > 1) {
+                    carouselInterval = setInterval(() => {
+                        nextSlide(category);
+                    }, 10000); // Cambiar cada 10 segundos
                 }
             }
 
@@ -1500,15 +2577,23 @@
                 }
             }
 
-            // Event listeners para controles del carrusel
-            nextButton.addEventListener('click', () => {
-                nextSlide();
-                startCarousel();
+            // Event listeners para controles de todos los carruseles
+            document.querySelectorAll('.carousel-prev').forEach(button => {
+                button.addEventListener('click', function() {
+                    const carousel = this.closest('.category-carousel');
+                    const category = carousel.id.split('-')[0];
+                    prevSlide(category);
+                    startCarousel(category, carouselStates[category].municipio);
+                });
             });
 
-            prevButton.addEventListener('click', () => {
-                prevSlide();
-                startCarousel();
+            document.querySelectorAll('.carousel-next').forEach(button => {
+                button.addEventListener('click', function() {
+                    const carousel = this.closest('.category-carousel');
+                    const category = carousel.id.split('-')[0];
+                    nextSlide(category);
+                    startCarousel(category, carouselStates[category].municipio);
+                });
             });
 
             // Funcionalidad para el modal de lugares
@@ -1517,12 +2602,26 @@
             const locationList = document.getElementById('locationList');
             const closeModal = document.querySelector('.close-modal');
 
-            // Abrir modal al hacer clic en "Ver lugares donde probarlo"
+            // Abrir modal al hacer clic en "Ver lugares donde probarlo" o "Dónde encontrar"
             document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('btn-lugares') || e.target.closest('.btn-lugares')) {
-                    const btn = e.target.classList.contains('btn-lugares') ? e.target : e.target.closest('.btn-lugares');
-                    const dishName = btn.getAttribute('data-dish');
-                    showLocations(dishName);
+                if (e.target.classList.contains('btn-lugares') || e.target.closest('.btn-lugares') ||
+                    e.target.classList.contains('btn-encontrar') || e.target.closest('.btn-encontrar')) {
+                    
+                    const btn = e.target.classList.contains('btn-lugares') || e.target.classList.contains('btn-encontrar') ? 
+                               e.target : e.target.closest('.btn-lugares, .btn-encontrar');
+                    
+                    let experienceName;
+                    let modalTitleText;
+                    
+                    if (btn.classList.contains('btn-lugares')) {
+                        experienceName = btn.getAttribute('data-dish');
+                        modalTitleText = `Lugares para probar ${experienceName}`;
+                    } else {
+                        experienceName = btn.getAttribute('data-experience');
+                        modalTitleText = `Dónde encontrar ${experienceName}`;
+                    }
+                    
+                    showLocations(experienceName, modalTitleText);
                 }
             });
 
@@ -1538,13 +2637,13 @@
                 }
             });
 
-            // Función para mostrar los lugares de un plato específico
-            function showLocations(dishName) {
-                modalTitle.textContent = `Lugares para probar ${dishName}`;
+            // Función para mostrar los lugares de una experiencia específica
+            function showLocations(experienceName, modalTitleText) {
+                modalTitle.textContent = modalTitleText;
                 locationList.innerHTML = '';
                 
-                if (locationsData[dishName]) {
-                    locationsData[dishName].forEach(location => {
+                if (locationsData[experienceName]) {
+                    locationsData[experienceName].forEach(location => {
                         const li = document.createElement('li');
                         li.className = 'location-item';
                         li.innerHTML = `
@@ -1554,7 +2653,7 @@
                         locationList.appendChild(li);
                     });
                 } else {
-                    locationList.innerHTML = '<li class="location-item">No hay información de lugares disponibles para este plato.</li>';
+                    locationList.innerHTML = '<li class="location-item">No hay información de lugares disponibles para esta experiencia.</li>';
                 }
                 
                 modal.style.display = 'flex';
